@@ -1,0 +1,26 @@
+@import "https://fonts.googleapis.com/css?family=Roboto&display=swap";
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    background-color:darkslategrey;
+}
+
+header {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+header div {
+    text-align: center;
+}
+
+header div a {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0 30px;
+}
