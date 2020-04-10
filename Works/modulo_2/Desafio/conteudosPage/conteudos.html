@@ -20,7 +20,7 @@
 
     <body>
         <div class="cards">
-            <div class="card starter">
+            <div id="starter" class="card">
                 <img src="https://skylab.rocketseat.com.br/static/64c237ccff807c054339a62d53b4b402.svg" alt="logo_starter">
                 <div class="card-info">
                     <p>Módulos: 43</p>
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="card launchbase">
+            <div id="launchbase" class="card">
                 <img src="https://skylab.rocketseat.com.br/static/0828532024cb46921a6b5e941f8d788d.svg" alt="logo_starter">
                 <div class="card-info">
                     <p>Módulos: 52</p>
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="card gostack">
+            <div id="gostack" class="card">
                 <img src="https://skylab.rocketseat.com.br/static/83a178a0653dab1d55e2ed7946465975.svg" alt="logo_starter">
                 <div class="card-info">
                     <p>Módulos: 64</p>
@@ -47,13 +47,21 @@
 
         <div class="modal-overlay">
             <div class="modal">
-                <a class="modal-maximize">
-                    <i class="material-icons">aspect_ratio</i>
-                </a>
-                <a class="modal-close">
-                    <i class="material-icons">close</i>
-                </a>
+                <div class="modal-header">
+                    <a class="modal-maximize">
+                        <i class="material-icons">aspect_ratio</i>
+                    </a>
+                    <a class="modal-close">
+                        <i class="material-icons">close</i>
+                    </a>
+                </div>
+
+                <div class="modal-content">
+                    <iframe src="" frameborder="0"></iframe>
+                </div>
             </div>
         </div>
+
+        <script src="script.js"></script>
     </body>
 </html>

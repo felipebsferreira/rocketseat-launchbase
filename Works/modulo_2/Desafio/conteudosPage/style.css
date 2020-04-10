@@ -26,30 +26,30 @@ body {
 }
 
 .cards {
-    margin-top: 32px;
+    margin-top: 200px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
 
 .card {
     text-align: center;
     border-radius: 5%;
-    width: 40%;
+    width: 80%;
     border: 2px solid rgba(0, 0, 0, 0.3);
     margin: 0 auto;
     cursor: pointer;
 }
 
-.card.starter:hover {
+#starter:hover {
     border: 2px solid rgb(98, 83, 180);
 }
 
-.card.launchbase:hover {
+#launchbase:hover {
     border: 2px solid rgb(255, 131, 49);
 }
 
-.card.gostack:hover {
+#gostack:hover {
     border: 2px solid rgb(0, 206, 97);
 }
 
@@ -78,10 +78,42 @@ body {
     visibility: hidden;
 }
 
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal {
     background-color: white;
     width: 70%;
     height: 70%;
     margin: 5vh auto;
     position: relative;
+    text-align: right;
+}
+
+.modal.maximized {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-header {
+    background-color: gray;
+
+}
+
+.modal-close,
+.modal-maximize {
+    cursor: pointer;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
 }
