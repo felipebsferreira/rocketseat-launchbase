@@ -12,10 +12,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.no-scroll {
-    overflow: hidden;
-}
-
 .body {
     width: 940px;
 }
@@ -91,7 +87,7 @@ header img {
 }
 
 .modal {
-    margin: 30vh auto;
+    margin: 20vh auto;
     width: 660px;
     height: 385px;
     border-radius: 16px;

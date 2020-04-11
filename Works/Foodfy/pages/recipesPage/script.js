@@ -5,7 +5,6 @@ const images = document.querySelectorAll(".card img");
 for (let image of images) {
     image.addEventListener("click", () => {
         modalOverlay.classList.add("active");
-        body.classList.add("no-scroll");
 
         const name = image.className;
         modalOverlay.querySelector("img").src = `../../assets/${name}.png`;
@@ -34,7 +33,6 @@ for (let image of images) {
 
 modalOverlay.querySelector(".modal-close").addEventListener("click", () => {
     modalOverlay.classList.remove("active");
-    body.classList.remove("no-scroll");
 
     modalOverlay.querySelector("img").src = "";
     modalOverlay.querySelector(".modal-name").innerHTML = "";
