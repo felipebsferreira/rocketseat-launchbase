@@ -1,0 +1,113 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap';
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.body {
+    width: 940px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin: 32px 0;
+}
+
+header img {
+    margin-right: 122.4px;
+    cursor: pointer;
+}
+
+.menu a {
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.menu a:hover {
+    border-bottom: 2px solid black;
+}
+
+
+.board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FBDFDB;
+    border-radius: 30px;
+    margin-bottom: 50px;
+}
+
+.board-text {
+    margin-right: 248px;
+}
+
+.board h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.board p {
+    opacity: 0.7;
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 316px;
+}
+
+.board img {
+    margin-top: 66px;
+}
+
+#mostAccessed {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.cards img {
+    width: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.card-name {
+    font-size: 18px;
+    margin: 20px 0 5px 0;
+}
+
+.card-author {
+    font-size: 14px;
+    color: #777777;
+}
+
+footer {
+    text-align: center;
+    background-color: #EEEEEE;
+    margin-top: 50px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+footer p {
+    margin: 31px 0;
+    font-size: 14px;
+    color: #999999;
+    line-height: 0;
+}
