@@ -1,0 +1,21 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Conteúdos</title>
+{% endblock %}
+
+{% block content %}
+    <div class="cards">
+        {% for card in cards %}
+            <div id="{{ card.id }}" class="card">
+                <img src="{{ card.image_url }}" alt="Logo do curso {{ card.id }}">
+                <div class="card-info">
+                    <p>Módulos: {{ card.modules }}</p>
+                    <p>{{ card.price }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script src="script.js"></script>
+{% endblock %}

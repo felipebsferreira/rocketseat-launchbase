@@ -1,0 +1,36 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Sobre</title>
+    <script src="https://kit.fontawesome.com/b60f0c27d4.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <img src="{{ data.logo_url }}" alt="Imagem de {{ data.name }}">
+        <h1>{{ data.name }}</h1>
+        <h2>{{ data.description }}</h2>
+    </div>
+
+    <div class="list">
+        <div>
+            <ul>
+                {% for tecnology in data.tecnologies %}
+                    <li>
+                        <i class="fas fa-star"></i>
+                        {{ tecnology }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="links">
+        {% for link in data.links %}
+            <a href="{{ link.url }}" target="_blank">
+                <i class="{{ link.iconClass }}"></i>
+                {{ link.name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

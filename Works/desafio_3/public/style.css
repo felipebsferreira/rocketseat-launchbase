@@ -1,0 +1,185 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap";
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    background-color: rgb(238, 237, 254);
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+header div {
+    text-align: center;
+}
+
+header div a {
+    color: black;
+    margin: 0 30px;
+}
+
+/* === about page === */
+
+div {
+    text-align: center;
+}
+
+.main {
+    margin: 32px;
+}
+
+.main img {
+    border-radius: 100px 30px;
+    height: 250px;
+}
+
+.main h1 {
+    margin-top: 32px;
+}
+
+.main h2 {
+    margin: 10px auto;
+    opacity: 0.7;
+    max-width: 400px;
+}
+
+.list {
+    background-color: rgb(98, 83, 180);
+    margin: 32px 0px;
+    padding: 15px;
+}
+
+.list div {
+    margin: 0px auto;
+    padding-left: 100px;
+    width: 250px;
+}
+
+.list i {
+    color: #f5dc22;
+}
+
+div ul {
+    font-size: 20px;
+    color: white;
+    list-style-type: none;
+    text-align: left;
+    line-height: 35px;
+}
+
+.links {
+    margin-top: 86px;
+}
+
+.links a {
+    color: black;
+    text-decoration: none;
+    margin: 0px 20px;
+}
+
+.links a:hover {
+    color: rgb(98, 83, 180);
+    transition: color 0.2s;
+    border-bottom: 2px solid rgb(98, 83, 180);
+}
+
+/* === courses page === */
+
+.cards {
+    margin-top: 200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    text-align: center;
+    border-radius: 5%;
+    width: 80%;
+    border: 4px solid rgb(0, 0, 0);
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: black;
+}
+
+#starter:hover {
+    border: 4px solid rgb(98, 83, 180);
+}
+
+#launchbase:hover {
+    border: 4px solid rgb(255, 131, 49);
+}
+
+#gostack:hover {
+    border: 4px solid rgb(0, 206, 97);
+}
+
+.card img {
+    margin: 25px 0;
+}
+
+.card-info {
+    text-align: center;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.card-info p {
+    color: white;
+}
+
+/* === not-found page === */
+
+.not-found-message {
+    margin-top: 100px;
+    text-align: center;
+}
+
+/* === COURSE PAGE === */
+.course {
+    margin: 200px auto;
+    text-align: center;
+    border-radius: 10%;
+    width: 300px;
+    background-color: black;
+    position: relative;
+    border: 4px solid rgb(0, 0, 0);
+}
+
+.course.starter {
+    border: 4px solid rgb(98, 83, 180);
+}
+
+.course.launchbase {
+    border: 4px solid rgb(255, 131, 49);
+}
+
+.course.gostack {
+    border: 4px solid rgb(0, 206, 97);
+}
+
+.course img {
+    margin: 25px 0;
+}
+
+.course-link {
+    position: absolute;
+    background-color: #f5dc22;
+    border-radius: 40%;
+    padding: 5px 20px;
+    top: -17px;
+    right: 0;
+}
+
+.course-link a {
+    text-decoration: none;
+    color: black;
+}
