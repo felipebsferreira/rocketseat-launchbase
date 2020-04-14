@@ -184,8 +184,15 @@ footer p {
     cursor: pointer;
 }
 
+.details {
+    height: auto;
+    max-height: 1000px;
+    transition: all 300ms ease-in-out;
+}
 .details-hidden {
-    display: none;
+    max-height: 0px;
+    visibility: hidden;
+    transition: all 300ms ease-in-out;
 }
 
 /* === NOT-FOUND PAGE === */

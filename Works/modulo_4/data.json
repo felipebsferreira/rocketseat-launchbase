@@ -1,0 +1,22 @@
+{
+    "instructors": [
+        {
+            "id": 1,
+            "name": "Felipe",
+            "avatar_url": "http://facebook.com",
+            "gender": "M",
+            "services": "Física, História",
+            "birth": 1586563200000,
+            "created_at": 1586890630973
+        },
+        {
+            "id": 2,
+            "name": "Jorge",
+            "avatar_url": "http://google.com",
+            "gender": "F",
+            "services": "Musculação, Crossfit",
+            "birth": 1567468800000,
+            "created_at": 1586890650152
+        }
+    ]
+}
