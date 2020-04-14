@@ -15,23 +15,37 @@ nunjucks.configure("views", {
  })
 
 server.get("/", (request, response) => {
-    return response.render("home")
+    return response.render("home", { recipes: data })
 })
 
 server.get("/about", (request, response) => {
-    const info = {
-        isAbout: true
-    }
+    const info = { isAbout: true }
 
     return response.render("about", { info })
 })
 
 server.get("/recipes", (request, response) => {
     const info = {
-        isRecipes: true
+        isRecipes: true,
+        recipes: data
     }
 
     return response.render("recipes", { info })
+})
+
+server.get("/recipes/:index", (request, response) => {
+    const index = request.params.index
+
+    const info = {
+        isRecipes: true,
+        data: data[index]
+    }
+
+    return response.render("details", { info })
+})
+
+server.use((request, response) => {
+    response.status(404).render("not-found")
 })
 
 server.listen("5000", () => {

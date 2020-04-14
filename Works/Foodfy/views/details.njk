@@ -1,0 +1,39 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Foodfy: receitas X</title>
+{% endblock %}
+
+{% block content %}
+    <div class="details-card">
+        <img src="{{ info.data.image }}" alt="Imagem de {{ info.data.title }}">
+        <h1>{{ info.data.title }}</h1>
+        <p>{{ info.data.author }}</p>
+    </div>
+
+    <div class="details-info">
+        <h2>Ingredientes</h2>
+        <p class="ingredients">ESCONDER</p>
+    </div>
+    <ul class="details-ingredients">
+        {% for ingredient in info.data.ingredients %}
+            <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="details-info">
+        <h2>Modo de preparo</h2>
+        <p class="preparation">ESCONDER</p>
+    </div>
+    <ul class="details-preparation">
+        {% for prep in info.data.preparation %}
+            <li>{{ prep }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="details-info">
+        <h2>Informações adicionais</h2>
+        <p class="additional">ESCONDER</p>
+    </div>
+    <p class="details-additional"> {{ info.data.information }}</p>
+{% endblock %}
