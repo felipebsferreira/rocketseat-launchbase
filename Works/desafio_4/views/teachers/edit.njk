@@ -1,0 +1,28 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div 
+            class="card-image"
+            style="background: url(https://source.unsplash.com/collection/6773393/500x500) no-repeat center center / cover">
+        </div>
+        
+        <div class="card-details">
+            <form method="POST" action="/teachers?_method=PUT">    
+                <h3>Edite os dados do Professor</h3>
+
+                {% include 'teachers/fields.njk' %}
+
+                <input type="hidden" name="id" value="{{ teacher.id }}">
+            </form>
+
+            <form id="form-delete" method="POST" action="/teachers?_method=DELETE">
+                <button type="submit">Deletar</button>
+                <input type="hidden" name="id" value="{{ teacher.id }}">
+            </form>
+        </div>
+    </div>
+{% endblock %}

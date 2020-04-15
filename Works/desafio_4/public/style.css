@@ -153,7 +153,8 @@ input::placeholder {
     font-weight: normal;
 }
 
-button {
+button,
+a.button {
     width: 100%;
     margin-top: 32px;
     background-color: #282a36;
@@ -161,9 +162,24 @@ button {
     border-radius: 4px;
     padding: 8px 32px;
     font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+a.button {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
 }
 
 select {
     font-size: 16px;
     outline: none;
+}
+
+/* === FORM DELETE === */
+#form-delete button[type="submit"] {
+    background-color: rgb(240, 82, 82);
+    margin-top: 8px;
 }
