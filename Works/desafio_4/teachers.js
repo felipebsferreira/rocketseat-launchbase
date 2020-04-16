@@ -3,6 +3,22 @@ const fs = require("fs")
 const data = require("./data.json")
 const utils = require("./utils")
 
+// Index
+exports.index = function (request, response) {
+    const teachers = []
+
+    for (let teacher of data.teachers) {
+        teachers.push({
+            id: teacher.id,
+            name: teacher.name,
+            photo_url: teacher.photo_url,
+            areas: teacher.areas.split(",")
+        })
+    }
+
+    return response.render("teachers/index", { teachers })
+}
+
 // Show
 exports.show = function (request, response) {
     const id = request.params.id

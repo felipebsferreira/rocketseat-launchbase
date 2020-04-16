@@ -22,7 +22,7 @@
         },
         {
             "id": 6,
-            "name": "Emilly Alves",
+            "name": "Emilly",
             "photo_url": "https://source.unsplash.com/collection/6773393/500x500",
             "educational_level": "doctor",
             "class_type": "P",
@@ -39,6 +39,16 @@
             "areas": "Caseína, cafeína, caxntonina, execrina, mastonina, serotonina, fantonina",
             "birth": 60220800000,
             "created_at": 1586962587540
+        },
+        {
+            "id": 8,
+            "name": "Carlos",
+            "photo_url": "https://source.unsplash.com/collection/6773393/500x500",
+            "educational_level": "undergraduate",
+            "class_type": "P",
+            "areas": "Física,Matemática,Geologia,Álgebra,Ciência dos Materiais",
+            "birth": 1477353600000,
+            "created_at": 1587040248407
         }
     ]
 }

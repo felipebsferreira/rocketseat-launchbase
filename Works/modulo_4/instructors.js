@@ -2,7 +2,24 @@ const fs = require("fs")
 const data = require("./data.json")
 const utils = require("./utils")
 
-//show
+// Index
+exports.index = function (request, response) {
+
+    const instructors = []
+
+    for (let instructor of data.instructors) {
+        instructors.push({
+            id: instructor.id,
+            name: instructor.name,
+            avatar_url: instructor.avatar_url,
+            services: instructor.services.split(",")
+        })
+    }
+
+    return response.render("instructors/index", { instructors })
+}
+
+// Show
 exports.show = function (request, response) {
     const { id } = request.params
 
@@ -25,7 +42,7 @@ exports.show = function (request, response) {
     return response.render("instructors/show", { instructor })
 }
 
-// create
+// Create
 exports.post = function (request, response) {
     const keys = Object.keys(request.body)
 
