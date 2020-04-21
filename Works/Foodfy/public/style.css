@@ -7,19 +7,32 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
     font-family: 'Roboto', sans-serif;
 }
 
-.body {
-    width: 940px;
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 120px;
 }
 
 header {
+    padding: 32px 0;
+    background-color: white;
+}
+
+header.admin {
+    background-color: black;
+}
+
+header div {
     display: flex;
     align-items: center;
-    margin: 32px 0;
+    width: 940px;
+    margin: auto;
 }
 
 header img {
@@ -34,6 +47,10 @@ header img {
     margin: 0 15px;
 }
 
+.menu a.admin {
+    color: white;
+}
+
 .menu a:hover {
     border-bottom: 2px solid black;
 }
@@ -43,19 +60,24 @@ header img {
 }
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
     text-align: center;
     background-color: #EEEEEE;
     margin-top: 50px;
-    width: 100%;
-    position: absolute;
-    left: 0;
+    padding: 32px 0;
 }
 
 footer p {
-    margin: 31px 0;
     font-size: 14px;
     color: #999999;
-    line-height: 0;
+}
+
+.body {
+    width: 940px;
+    margin: auto;
 }
 
 /* === HOME PAGE === */
@@ -186,16 +208,143 @@ footer p {
 
 .details {
     height: auto;
-    max-height: 1000px;
-    transition: all 300ms ease-in-out;
 }
+
 .details-hidden {
     max-height: 0px;
     visibility: hidden;
-    transition: all 300ms ease-in-out;
 }
 
 /* === NOT-FOUND PAGE === */
 .not-found-content {
     text-align: center;
+}
+
+/* === ADMIN INDEX === */
+.admin-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.admin-header div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.admin-header a,
+.admin-header button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#admin-title {
+    font-size: 24px;
+    margin: 30px 0;
+}
+
+.button {
+    text-decoration: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 9px 20px;
+    background-color: #6558C3;
+    border-radius: 4px;
+}
+
+.button.delete {
+    background-color: rgb(224, 82, 82);
+}
+
+.admin-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.admin-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-card div:first-child {
+    margin-right: 20px;
+}
+
+.admin-card img {
+    width: 172px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8.57px;
+}
+
+.admin-card h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    width: 300px;
+}
+
+.admin-card p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.admin-card a {
+    font-size: 14px;
+    color: #6558C3;
+    text-decoration: none;
+}
+
+/* === CREATE-EDIT FIELDS === */
+.create-edit-fields p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.create-edit-fields input,
+.create-edit-fields textarea {
+    border: 1px solid #DDD;
+    width: 100%;
+    border-radius: 4px;
+    height: 50px;
+    font-size: 16px;
+}
+
+.create-edit-fields section {
+    margin-bottom: 30px;
+}
+
+#ingredients div,
+#preparations div {
+    margin-top: 10px;
+}
+
+#ingredients div:first-child,
+#preparations div:first-child {
+    margin-top: 0px;
+}
+
+#ingredients div:last-child,
+#preparations div:last-child {
+    margin-bottom: 15px;
+}
+
+.create-edit-fields a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #6558C3;
+    cursor: pointer;
+}
+
+.create-edit-fields .delete-ingredient, 
+.create-edit-fields .delete-preparation {
+    margin-left: 64px;
+}
+
+.create-edit-fields textarea {
+    height: 260px;
+    resize: none;
 }

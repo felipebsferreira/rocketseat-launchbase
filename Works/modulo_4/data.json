@@ -6,17 +6,8 @@
             "avatar_url": "https://images.unsplash.com/photo-1545346315-f4c47e3e1b55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
             "gender": "M",
             "services": "Física, História, Matemática, Sociologia, Campologia, Astronomia",
-            "birth": 578016000000,
+            "birth": 546393600000,
             "created_at": 1586960867152
-        },
-        {
-            "id": 3,
-            "name": "Dona Ana",
-            "avatar_url": "https://images.unsplash.com/photo-1550259979-ed79b48d2a30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=704&q=80",
-            "gender": "F",
-            "services": "Musculação, Crossfit",
-            "birth": "2013-11-30",
-            "created_at": 1586960936664
         },
         {
             "id": 4,
@@ -35,6 +26,30 @@
             "services": "IA, Signal Processing, Redes Neurais, Vector Design, Redes de Computadores, Aikido, Natação, Futebol, Surf",
             "birth": "1976-08-30",
             "created_at": 1586989013298
+        }
+    ],
+    "members": [
+        {
+            "avatar_url": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+            "name": "Paulo César",
+            "email": "pauloc@gmail.com",
+            "birth": "1996-07-29",
+            "gender": "M",
+            "blood": "O-",
+            "weight": 92,
+            "height": 160,
+            "id": 2
+        },
+        {
+            "avatar_url": "https://images.unsplash.com/photo-1546817372-628669db4655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80",
+            "name": "Clara",
+            "email": "clara@hotmail.com",
+            "birth": "1993-07-27",
+            "gender": "F",
+            "blood": "O+",
+            "weight": "59",
+            "height": "164",
+            "id": 3
         }
     ]
 }

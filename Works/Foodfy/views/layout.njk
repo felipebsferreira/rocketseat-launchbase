@@ -8,20 +8,27 @@
     </head>
 
     <body>
-        <div class="body">
-            <header>
-                <a href="/">
-                    <img src="/assets/logo.png" alt="logo_foodfy">
-                </a>  
-                
-                <div class="menu">
-                    <a class="{{ 'menu-selected' if info.isAbout }}" href="/about">Sobre</a>
-                    <a class="{{ 'menu-selected' if info.isRecipes }}" href="/recipes">Receitas</a>
+        <div id="page-container">
+            <div id="content-wrap">
+                <header>
+                    <div>
+                        <a href="/">
+                            <img src="/assets/logo_black.png" alt="logo_foodfy">
+                        </a>  
+                        
+                        <div class="menu">
+                            <a href="/about">Sobre</a>
+                            <a href="/recipeslist">Receitas</a>
+                            <a href="/admin/recipes">Admin</a>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="body">
+                    {% block content %}
+                    {% endblock %}
                 </div>
-            </header>
-    
-            {% block content %}
-            {% endblock %}
+            </div>
 
             <footer>
                 <p>Todos direitos reservados, receitas Foodfy.</p>

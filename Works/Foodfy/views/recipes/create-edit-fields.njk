@@ -1,0 +1,57 @@
+<div class="create-edit-fields">
+    <section>
+        <p>Título da receita</p>
+        <input type="text" name="title" required value="{{ recipe.title }}">
+    </section>
+
+    <section>
+        <p>Imagem da receita</p>
+        <input type="url" name="image" required value="{{ recipe.image }}">
+    </section>
+    
+    <section>
+        <p>Autor</p>
+        <input type="text" name="author" required value="{{ recipe.author }}">
+    </section>
+    
+    <section>
+        <p>Ingredientes</p>
+        <div id="ingredients">
+            {% if create %}
+                <div class="ingredient">
+                    <input type="text" name="ingredients[]" required>
+                </div>
+            {% endif %}
+            {% for ingredient in recipe.ingredients %}
+                <div class="ingredient">
+                    <input type="text" name="ingredients[]" required value="{{ ingredient }}">
+                </div>
+            {% endfor %}
+        </div>
+        <a class="add-ingredient">Adicionar novo</a>
+        <a class="delete-ingredient">Remover</a>
+    </section>
+
+    <section>
+        <p>Modo de preparo</p>
+        <div id="preparations">
+            {% if create %}
+                <div class="preparation">
+                    <input type="text" name="preparations[]" required>
+                </div>
+            {% endif %}
+            {% for preparation in recipe.preparations %}
+                <div class="preparation">
+                    <input type="text" name="preparations[]" required value="{{ preparation }}">
+                </div>
+            {% endfor %}
+        </div>
+        <a class="add-preparation">Adicionar novo</a>
+        <a class="delete-preparation">Remover</a>
+    </section>
+    
+    <section>
+        <p>Informações adicionais</p>
+        <textarea name="information">{{ recipe.information }}</textarea>
+    </section>
+</div>

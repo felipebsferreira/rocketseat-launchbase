@@ -21,7 +21,9 @@
     <div class="cards">
         {% for i in range(0, 6) %}
             <div class="card">
-                <img src="{{ recipes[i].image }}" alt="Imagem de {{ recipes[i].title }}">
+                <a href="/recipeslist/{{ recipes[i].id }}">
+                    <img src="{{ recipes[i].image }}" alt="Imagem de {{ recipes[i].title }}">
+                </a>
                 <p class="card-name">{{ recipes[i].title }}</p>
                 <p class="card-author">{{ recipes[i].author }}</p>
             </div>

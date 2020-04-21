@@ -1,6 +1,6 @@
 const fs = require("fs")
-const data = require("./data.json")
-const utils = require("./utils")
+const data = require("../data.json")
+const utils = require("../utils")
 
 // Index
 exports.index = function (request, response) {
@@ -17,6 +17,11 @@ exports.index = function (request, response) {
     }
 
     return response.render("instructors/index", { instructors })
+}
+
+// Create
+exports.create = function (request, response) {
+    return response.render("instructors/create")
 }
 
 // Show
@@ -97,7 +102,7 @@ exports.edit = function (request, response) {
         return response.send("Instructor not found!")
     }
 
-    foundInstructor.birth = utils.date(foundInstructor.birth)
+    foundInstructor.birth = utils.date(foundInstructor.birth).iso
     
     return response.render("instructors/edit", { instructor: foundInstructor })
 }
