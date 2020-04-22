@@ -1,56 +1,57 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap";
 
 :root {
-    --color-green: #50fa7b;
-    --color-rocket: #7159c1
+    --primary-color: #7159c1;
+    --second-color: #f7df1e;
 }
 
 * {
     margin: 0;
     padding: 0;
-    border: 0;
+    border: none;
 }
 
 body {
-    background: #282a36;
     font-family: 'Roboto', sans-serif;
-    color: white;
+    background-color: var(--primary-color);
 }
 
 header {
+    background-color: white;
     width: 100%;
     padding: 32px;
     text-align: center;
     box-sizing: border-box;
-    border-bottom: 1px solid #333;
-    background: rgba(0, 0, 0, 0.1);
 }
 
 .links {
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .links a {
-    color: white;
     text-decoration: none;
+    color: #777;
     position: relative;
 }
 
 .links a + a {
-    margin-left: 16px;
+    margin-left: 32px;
+}
+
+.links a.active {
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .links a:hover {
-    color: var(--color-green);
-    font-weight: bold;
-    transition: color 300ms;
+    color: var(--primary-color);
 }
 
 .links a::after {
     content: "";
     width: 0;
     height: 2px;
-    background-color: var(--color-green);;
+    background-color: var(--primary-color);
     position: absolute;
     left: 0;
     bottom: -4px;
@@ -61,40 +62,20 @@ header {
     transition: width 200ms ease-in-out;
 }
 
-.active {
-    font-weight: bold;
-}
-
 /* === CARD === */
-#index-create-btn {
-    background-color: #282a36;
-    color: white;
-    border-radius: 4px;
-    padding: 8px 32px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 32px;
-}
-
 .card {
     background-color: white;
     width: 800px;
     min-height: 400px;
-    color: black;
-
+    
     margin: 45px auto;
 
     display: grid;
-    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-columns: 1fr 1fr;
 
-    box-shadow: 0px 0px 6px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.4);
 
     animation: up 700ms ease-out;
-
-    position: relative;
 }
 
 @keyframes up {
@@ -109,21 +90,22 @@ header {
 
 /* details */
 
-.card-details {
+.details {
     padding: 32px;
+
 }
 
-.card-forms form {
-    width: 100%;
-}
-
-.card-details .item {
+.details .item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 16px 0;
 }
 
-.card-details h3,
-.card-details .item div:first-child {
+.details .item:last-child {
+    border: none;
+}
+
+.details h3,
+.details .item div:nth-child(1) {
     font-size: 14px;
     line-height: 24px;
     color: #777;
@@ -131,21 +113,23 @@ header {
     font-weight: normal;
 }
 
-.card-details .item div:nth-child(2) {
+.details .item div:nth-child(2) {
     color: #555;
     font-weight: bold;
     font-size: 18px;
 }
 
-.card-details h3 {
+.details h3 {
     text-transform: uppercase;
     font-weight: bold;
+    color: var(--primary-color);
 }
 
-.card-details .item span {
+.details .item span {
     padding: 8px 16px;
-    background-color: #f7df1e;
+    background-color: var(--second-color);
     border-radius: 16px;
+    color: #777;
     margin-right: 4px;
     margin-top: 8px;
     display: inline-block;
@@ -154,9 +138,7 @@ header {
 }
 
 /* === FORM === */
-
-input,
-select {
+input, select {
     width: 100%;
     outline: none;
     color: #555;
@@ -174,16 +156,17 @@ input::placeholder {
     font-weight: normal;
 }
 
-button,
+button[type="submit"],
 a.button {
-    width: 100%;
-    background-color: #282a36;
+    padding: 8px 32px;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 4px;
-    padding: 8px 32px;
+    margin-top: 32px;
+    width: 100%;
     font-size: 16px;
-    cursor: pointer;
     outline: none;
+    cursor: pointer;
 }
 
 a.button {
@@ -193,18 +176,17 @@ a.button {
     text-decoration: none;
 }
 
-select {
-    font-size: 16px;
-    outline: none;
-}
-
 /* === FORM DELETE === */
 #form-delete button[type="submit"] {
-    background-color: rgb(240, 82, 82);
-    margin-top: 8px;
+    background-color: rgb(235, 80, 80); 
+    margin-top: 16px
 }
 
-/* === INDEX === */
+/* === INDEX INSTRUCTORS === */
+
+table {
+    border-collapse: collapse; 
+}
 
 .table-container {
     display: block;
@@ -214,62 +196,77 @@ select {
 
 .table-container table {
     border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
 }
 
-.table-container tr {
-    border-bottom: 1px solid #d9d9d9;
-}
-
-.table-container tbody tr:last-child {
-    border: none;
-}
-
-.table-container thead th {
-    text-transform: uppercase;
-}
-
-.table-container tbody td,
-.table-container thead th {
-    padding: 16px;
+.table-container thead tr th {
     text-align: left;
 }
 
-.table-container tbody td:last-child,
-.table-container thead th {
-    text-align: center;
+td, th {
+    padding: 16px;
 }
 
-.table-container tbody td:nth-child(2) span {
+tr {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+th {
     text-transform: uppercase;
     color: #777;
-    font-size: 12px;
-    background-color: #f7df1e;
+    font-size: 14px;
+    border-top: 1px solid #d9d9d9;
+}
+
+tbody tr:last-child {
+    border: none;
+}
+
+tbody tr td:first-child div {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+tbody tr td:first-child span {
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid white;
+}
+
+tbody tr td:nth-child(2) span {
     padding: 8px 16px;
-    border-radius: 8px;
-    margin-left: 4px;
+    background-color: var(--second-color);
+    border-radius: 16px;
+    color: #777;
+    margin-right: 4px;
     margin-top: 8px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+tbody tr td:last-child a,
+.table-container > a {
+    background-color: var(--primary-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+.table-container > a {
+    margin-bottom: 16px;
     display: inline-block;
 }
 
-.table-container tbody td a {
-    background-color: #282a36;
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 4px 4px 6px -2px black;
-}
-
-.table-container tbody td:first-child div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.table-container tbody td:first-child img {
-    width: 40px;
-    border-radius: 50%;
-    margin-right: 12px;
+.table-container thead tr th:last-child,
+td:last-child {
+    text-align: center;
 }

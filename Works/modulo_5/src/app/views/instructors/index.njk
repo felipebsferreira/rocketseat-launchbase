@@ -1,38 +1,36 @@
 {% extends "layout.njk" %}
 
 {% block head %}
-    <title>Aulas particulares</title>
-{% endblock %}
+{% endblock head %}
 
 {% block content %}
     <div class="card table-container">
-        <a id="index-create-btn" href="/teachers/create">Criar professor</a>
-
-        <table>
+        <a href="/instructors/create">Novo</a>
+        
+        <table width="100%">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Acompanhamento</th>
+                    <th>Instructor</th>
+                    <th>Atendimento</th>
                     <th>Ação</th>
                 </tr>
             </thead>
-
             <tbody>
-                {% for teacher in teachers %}
+                {% for instructor in instructors %}
                     <tr>
                         <td>
                             <div>
-                                <img src="{{teacher.photo_url}}" alt="photo">
-                                {{ teacher.name }}
+                                <span style="background-image: url({{ instructor.avatar_url }})"></span>
+                                {{ instructor.name }}
                             </div>
                         </td>
                         <td>
-                            {% for area in teacher.areas %}
-                                <span>{{ area }}</span>
+                            {% for service in instructor.services %}
+                                <span>{{ service }}</span>
                             {% endfor %}
                         </td>
                         <td>
-                            <a href="/teachers/{{ teacher.id }}">Ver</a>
+                            <a href="/instructors/{{ instructor.id }}">ver</a>
                         </td>
                     </tr>
                 {% endfor %}

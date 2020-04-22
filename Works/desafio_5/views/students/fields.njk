@@ -1,0 +1,72 @@
+<div class="item">
+    <div>Foto URL</div>
+    <div>
+        <input type="url" name="photo_url" placeholder="http://" value="{{ student.photo_url }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Nome completo</div>
+    <div>
+        <input type="text" name="name" placeholder="Digite seu nome completo" value="{{ student.name }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Data de nascimento</div>
+    <div>
+        <input type="date" name="birth" value="{{ student.birth }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>E-mail</div>
+    <div>
+        <input type="email" name="email" value="{{ student.email }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Ano escolar</div>
+    <div>
+        <select name="school_year">
+            <option value="elementary_5" 
+                {% if student.school_year == "elementary_5" %}
+                    selected
+                {% endif %}>5º ano do ensino fundamental</option>
+            <option value="elementary_6" 
+                {% if student.school_year == "elementary_6" %}
+                    selected
+                {% endif %}>6º ano do ensino fundamental</option>
+            <option value="elementary_7"
+                {% if student.school_year == "elementary_7" %}
+                    selected
+                {% endif %}>7º ano do ensino fundamental</option>
+            <option value="elementary_8"
+                {% if student.school_year == "elementary_8" %}
+                    selected
+                {% endif %}>8º ano do ensino fundamental</option>
+            <option value="high_school_1"
+                {% if student.school_year == "high_school_1" %}
+                    selected
+                {% endif %}>1º ano do ensino médio</option>
+            <option value="high_school_2"
+                {% if student.school_year == "high_school_2" %}
+                    selected
+                {% endif %}>2º ano do ensino médio</option>
+            <option value="high_school_3"
+                {% if student.school_year == "high_school_3" %}
+                    selected
+                {% endif %}>3º ano do ensino médio</option>
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    <div>Carga horário semanal</div>
+    <div>
+        <input type="number" name="workload" value="{{ student.workload }}" placeholder="Carga horária">
+    </div>
+</div>
+
+<button type="submit">Salvar</button>

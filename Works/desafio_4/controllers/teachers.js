@@ -1,7 +1,7 @@
 const fs = require("fs")
 
-const data = require("./data.json")
-const utils = require("./utils")
+const data = require("../data.json")
+const utils = require("../utils")
 
 // Index
 exports.index = function (request, response) {
@@ -43,8 +43,33 @@ exports.show = function (request, response) {
     return response.render("teachers/show", { teacher })
 }
 
+// Edit
+exports.edit = function (request, response) {
+    const id = request.params.id
+
+    const foundTeacher = data.teachers.find((teacher) => {
+        return teacher.id == id
+    })
+
+    if (!foundTeacher) {
+        return response.send("Teacher not found!")
+    }
+
+    const teacher = {
+        ...foundTeacher,
+        birth: utils.date(foundTeacher.birth).iso,
+    }
+
+    return response.render("teachers/edit", { teacher })
+}
+
 // Create
 exports.create = function (request, response) {
+    return response.render("teachers/create")
+}
+
+// Post
+exports.post = function (request, response) {
     const keys = Object.keys(request.body)
 
     for (let key of keys) {
@@ -86,26 +111,6 @@ exports.create = function (request, response) {
             return response.redirect(`/teachers/${id}`)
         }
     })
-}
-
-// Edit
-exports.edit = function (request, response) {
-    const id = request.params.id
-
-    const foundTeacher = data.teachers.find((teacher) => {
-        return teacher.id == id
-    })
-
-    if (!foundTeacher) {
-        return response.send("Teacher not found!")
-    }
-
-    const teacher = {
-        ...foundTeacher,
-        birth: utils.date(foundTeacher.birth),
-    }
-
-    return response.render("teachers/edit", { teacher })
 }
 
 // Put

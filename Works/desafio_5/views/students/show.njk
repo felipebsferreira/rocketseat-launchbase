@@ -1,0 +1,49 @@
+{% extends "layout.njk" %}
+
+{% block head %}
+    <title>Aulas particulares</title>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div 
+            class="card-image"
+            style="background: url({{ student.photo_url }}) no-repeat center center / cover">
+        </div>
+        <div class="card-details">
+            <h3>Detalhes</h3>
+
+            <div class="item">
+                <div>Nome completo</div>
+                <div>{{ student.name }}</div>
+            </div>
+
+            <div class="item">
+                <div>Idade</div>
+                <div>{{ student.age }}</div>
+            </div>
+
+            <div class="item">
+                <div>E-mail</div>
+                <div>{{ student.email }}</div>
+            </div>
+
+            <div class="item">
+                <div>Ano escolar</div>
+                <div>{{ student.school_year }}</div>
+            </div>
+
+            <div class="item">
+                <div>Carga horária semanal</div>
+                <div>{{ student.workload }}h</div>
+            </div>
+
+            <div class="item">
+                <div>Desde</div>
+                <div>{{ student.created_at }}</div>
+            </div>
+
+            <a class="button" href="/students/{{ student.id }}/edit">Editar</a>
+        </div>
+    </div>
+{% endblock %}

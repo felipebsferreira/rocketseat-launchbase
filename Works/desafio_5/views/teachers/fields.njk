@@ -1,0 +1,67 @@
+<div class="item">
+    <div>Foto URL</div>
+    <div>
+        <input type="url" name="photo_url" placeholder="http://" value="{{ teacher.photo_url }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Nome completo</div>
+    <div>
+        <input type="text" name="name" placeholder="Digite seu nome completo" value="{{ teacher.name }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Data de nascimento</div>
+    <div>
+        <input type="date" name="birth" value="{{ teacher.birth }}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Grau de escolaridade</div>
+    <div>
+        <select name="educational_level">
+            <option value="high_school" 
+                {% if teacher.educational_level == "high_school" %}
+                    selected
+                {% endif %}>Ensino Médio Completo</option>
+            <option value="undergraduate" 
+                {% if teacher.educational_level == "undergraduate" %}
+                    selected
+                {% endif %}>Ensino Superior Completo</option>
+            <option value="master"
+                {% if teacher.educational_level == "master" %}
+                    selected
+                {% endif %}>Mestrado</option>
+            <option value="doctor"
+                {% if teacher.educational_level == "doctor" %}
+                    selected
+                {% endif %}>Doutorado</option>
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    <div>Tipo de aula</div>
+    <div>
+        <span><input type="radio" name="class_type" value="P"
+            {% if teacher.class_type == "P" %}
+                checked
+            {% endif %}>Presencial</span>
+        <span><input type="radio" name="class_type" value="D"
+            {% if teacher.class_type == "D" %}
+                checked
+            {% endif %}>À distância</span>
+    </div>
+</div>
+
+<div class="item">
+    <div>Áreas de especialidade</div>
+    <div>
+        <input type="text" name="areas" placeholder="Digite as áreas separadas por vírgula" value="{{ teacher.areas }}">
+    </div>
+</div>
+
+<button type="submit">Salvar</button>
