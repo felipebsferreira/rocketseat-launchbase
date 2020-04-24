@@ -1,21 +1,16 @@
 const { age, date } = require("../../lib/utils")
-const db = require("../../config/db")
+const Instructor = require("../models/instructor")
 
 module.exports = {
     index (request, response) {
-        db.query("SELECT * FROM instructors", (err, results) => {
-            if (err)
-                return response.send("Database error!")
-            else
-            {
-                const instructors = [...results.rows]
-                for (let instructor of instructors) {
-                    instructor.services = instructor.services.split(",")
-                }
-
-                return response.render("instructors/index", { instructors })
+        Instructor.all((instructors) => {
+            for (let instructor of instructors) {
+                instructor.services = instructor.services.split(",")
             }
+
+            return response.render("instructors/index", { instructors })
         })
+        
     },
 
     create (request, response) {
@@ -23,11 +18,35 @@ module.exports = {
     },
 
     show (request, response) {
-        return response.send("show")
+        const id = request.params.id
+        
+        Instructor.getById(id, (instructor) => {
+            if (!instructor) {
+                return response.send("Instructor not found!")
+            }
+
+            instructor.age = age(instructor.birth)
+            instructor.gender = instructor.gender == "M" || instructor.gender == "m" ? "Masculino" : "Feminino"
+            instructor.services = instructor.services.split(",")
+            instructor.created_at = date(instructor.created_at).format
+
+            return response.render("instructors/show", { instructor })
+        })
     },
 
     edit (request, response) {
-        return response.send("edit")
+        const id = request.params.id
+        
+        Instructor.getById(id, (instructor) => {
+            if (!instructor) {
+                return response.send("Instructor not found!")
+            }
+
+            instructor.birth = date(instructor.birth).iso
+            instructor.gender = instructor.gender.toUpperCase()
+
+            return response.render("instructors/edit", { instructor })
+        })
     },
 
     post (request, response) {
@@ -39,33 +58,8 @@ module.exports = {
             }
         }
 
-        const query = `
-            INSERT INTO instructors (
-                name,
-                avatar_url,
-                gender,
-                services,
-                birth,
-                created_at
-            ) 
-            VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING id
-        `
-
-        const values = [
-            request.body.name,
-            request.body.avatar_url,
-            request.body.gender,
-            request.body.services,
-            date(request.body.birth).iso,
-            date(Date.now()).iso
-        ]
-
-        db.query(query, values, (err, results) => {
-            if (err)
-                return response.send("Database error!")
-            else
-                return response.redirect(`/instructors/${results.rows[0].id}`)
+        Instructor.create(request.body, (instructor) => {
+            return response.redirect(`/instructors/${instructor.id}`)
         })
     },
 
@@ -78,10 +72,14 @@ module.exports = {
             }
         }
         
-        return response.send("put")
+        Instructor.update(request.body, () => {
+            return response.redirect(`/instructors/${request.body.id}`)
+        })
     },
 
     delete (request, response) {
-        return response.send("delete")
+        Instructor.delete(request.body.id, () => {
+            return response.redirect("/instructors")
+        })
     }
 }
