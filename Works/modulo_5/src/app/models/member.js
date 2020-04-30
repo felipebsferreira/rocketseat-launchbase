@@ -4,12 +4,9 @@ const db = require("../../config/db")
 module.exports = {
     all(callback) {
         const query = `
-            SELECT i.*, count(m) AS total_students
-            FROM instructors i
-            LEFT JOIN members m
-            ON i.id = m.instructor_id
-            GROUP BY i.id
-            ORDER BY total_students DESC
+            SELECT *
+            FROM members
+            ORDER BY name ASC
         `
 
         db.query(query, (error, results) => {
@@ -23,15 +20,18 @@ module.exports = {
 
     create(data, callback) {
         const query = `
-            INSERT INTO instructors (
+            INSERT INTO members (
                 name,
                 avatar_url,
                 gender,
-                services,
+                email,
                 birth,
-                created_at
+                blood,
+                weight,
+                height,
+                instructor_id
             ) 
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id
         `
 
@@ -39,9 +39,12 @@ module.exports = {
             data.name,
             data.avatar_url,
             data.gender,
-            data.services,
+            data.email,
             date(data.birth).iso,
-            date(Date.now()).iso
+            data.blood,
+            data.weight,
+            data.height,
+            data.instructor
         ]
 
         db.query(query, values, (error, results) => {
@@ -54,9 +57,10 @@ module.exports = {
 
     getById (id, callback) {
         const query = `
-            SELECT *
-            FROM instructors
-            WHERE id = $1
+            SELECT members.*, instructors.name AS instructor_name
+            FROM members
+            LEFT JOIN instructors ON members.instructor_id = instructors.id
+            WHERE members.id = $1
         `
 
         db.query(query, [id], (error, results) => {
@@ -67,36 +71,19 @@ module.exports = {
         })
     },
 
-    getBy (filter, callback) {
-        const query = `
-            SELECT i.*, count(m) AS total_students
-            FROM instructors i
-            LEFT JOIN members m
-                ON i.id = m.instructor_id
-            WHERE i.name ILIKE '%${filter}%'
-                OR i.services ILIKE '%${filter}%'
-            GROUP BY i.id
-            ORDER BY total_students DESC
-        `
-
-        db.query(query, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            else {
-                callback(results.rows)
-            }
-        })
-    },
-
     update (data, callback) {
         const query = `
-            UPDATE instructors SET
+            UPDATE members SET
                 avatar_url = $1,
                 name = $2,
                 birth = $3,
                 gender = $4,
-                services = $5
-            WHERE id = $6
+                email = $5,
+                blood = $6,
+                weight = $7,
+                height = $8,
+                instructor_id = $9
+            WHERE id = $10
         `
 
         const values = [
@@ -104,7 +91,11 @@ module.exports = {
             data.name,
             date(data.birth).iso,
             data.gender,
-            data.services,
+            data.email,
+            data.blood,
+            data.weight,
+            data.height,
+            data.instructor,
             data.id
         ]
 
@@ -117,11 +108,25 @@ module.exports = {
     },
 
     delete (id, callback) {
-        db.query(`DELETE FROM instructors WHERE id = $1`, [id], (error) => {
+        db.query(`DELETE FROM members WHERE id = $1`, [id], (error) => {
             if (error)
                 throw `Database error! ${error}`
 
             callback()
+        })
+    },
+
+    instructorsSelectOptions (callback) {
+        const query = `
+            SELECT id, name
+            FROM instructors
+        `
+
+        db.query(query, (error, results) => {
+            if (error)
+                throw `Database error! ${error}`
+
+            callback(results.rows)
         })
     }
 }

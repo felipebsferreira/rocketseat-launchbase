@@ -1,20 +1,48 @@
-const utils = require("../../lib/utils")
+const { date } = require("../../lib/utils")
+const Member = require("../models/member")
 
 module.exports = {
     index (request, response) {
-        return response.render("members/index", { members })
+        Member.all(members => {
+            return response.render("members/index", { members })
+        })
     },
 
     create (request, response) {
-        return response.render("members/create")
+        Member.instructorsSelectOptions(instructorOptions => {
+            return response.render("members/create", { instructorOptions })
+        })
     },
 
     show (request, response) {
-        return response.send("show")
+        const id = request.params.id
+        
+        Member.getById(id, (member) => {
+            if (!member) {
+                return response.send("Member not found!")
+            }
+            member.birth = date(member.birth).birthDay
+            member.gender = member.gender == "M" || member.gender == "m" ? "Masculino" : "Feminino"
+
+            return response.render("members/show", { member })
+        })
     },
 
     edit (request, response) {
-        return response.send("edit")
+        const id = request.params.id
+        
+        Member.getById(id, (member) => {
+            if (!member) {
+                return response.send("Member not found!")
+            }
+
+            member.birth = date(member.birth).iso
+            member.gender = member.gender.toUpperCase()
+
+            Member.instructorsSelectOptions(instructorOptions => {
+                return response.render("members/edit", { member, instructorOptions })
+            })
+        })
     },
 
     post (request, response) {
@@ -26,9 +54,9 @@ module.exports = {
             }
         }
 
-        const { id, name, avatar_url, gender, services, birth, created_at } = request.body
-
-        return response.send("post")
+        Member.create(request.body, (member) => {
+            return response.redirect(`/members/${member.id}`)
+        })
     },
 
     put (request, response) {
@@ -40,10 +68,14 @@ module.exports = {
             }
         }
         
-        return response.send("put")
+        Member.update(request.body, () => {
+            return response.redirect(`/members/${request.body.id}`)
+        })
     },
 
     delete (request, response) {
-        return response.send("delete")
+        Member.delete(request.body.id, () => {
+            return response.redirect("/members")
+        })
     }
 }

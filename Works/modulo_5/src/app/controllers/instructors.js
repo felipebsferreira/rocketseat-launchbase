@@ -3,14 +3,25 @@ const Instructor = require("../models/instructor")
 
 module.exports = {
     index (request, response) {
-        Instructor.all((instructors) => {
-            for (let instructor of instructors) {
-                instructor.services = instructor.services.split(",")
-            }
+        const { filter } = request.query
 
-            return response.render("instructors/index", { instructors })
-        })
-        
+        if (filter) {
+            Instructor.getBy(filter, (instructors) => {
+                for (let instructor of instructors) {
+                    instructor.services = instructor.services.split(",")
+                }
+    
+                return response.render("instructors/index", { instructors, filter })
+            })
+        } else {
+            Instructor.all((instructors) => {
+                for (let instructor of instructors) {
+                    instructor.services = instructor.services.split(",")
+                }
+    
+                return response.render("instructors/index", { instructors })
+            })
+        }
     },
 
     create (request, response) {
