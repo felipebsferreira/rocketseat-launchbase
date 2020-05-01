@@ -3,13 +3,25 @@ const Teacher = require("../models/teacher")
 
 module.exports = {
     index (request, response) {
-        Teacher.getAll(teachers => {
-            for (let teacher of teachers) {
-                teacher.areas = teacher.areas.split(",")
-            }
+        const { filter } = request.query
 
-            return response.render("teachers/index", { teachers })
-        })
+        if (filter) {
+            Teacher.getBy(filter, teachers => {
+                for (let teacher of teachers) {
+                    teacher.areas = teacher.areas.split(",")
+                }
+    
+                return response.render("teachers/index", { teachers, filter })
+            })
+        } else {
+            Teacher.getAll(teachers => {
+                for (let teacher of teachers) {
+                    teacher.areas = teacher.areas.split(",")
+                }
+    
+                return response.render("teachers/index", { teachers })
+            })
+        }
     },
 
     show (request, response) {

@@ -3,9 +3,12 @@ const db = require("../../config/db")
 module.exports = {
     getAll (callback) {
         const query = `
-            SELECT * 
-            FROM teachers
-            ORDER BY name
+            SELECT t.*, count(s) AS total_students 
+            FROM teachers t
+            LEFT JOIN students s
+                ON t.id = s.teacher_id
+            GROUP BY t.id
+            ORDER BY total_students DESC
         `
 
         db.query(query, (error, results) => {
@@ -24,6 +27,26 @@ module.exports = {
         `
 
         db.query(query, [id], (error, results) => {
+            if (error)
+                throw `Database error! ${error}`
+
+            callback(results.rows)
+        })
+    },
+
+    getBy (filter, callback) {
+        const query = `
+            SELECT t.*, count(s) AS total_students 
+            FROM teachers t
+            LEFT JOIN students s
+                ON t.id = s.teacher_id
+            WHERE t.name ILIKE '%${filter}%'
+                OR t.areas ILIKE '%${filter}%'
+            GROUP BY t.id
+            ORDER BY total_students DESC
+        `
+
+        db.query(query, (error, results) => {
             if (error)
                 throw `Database error! ${error}`
 
@@ -75,8 +98,6 @@ module.exports = {
                 areas = $6
             WHERE id = $7
         `
-
-        console.log(teacher)
         
         const values = [
             teacher.name,
@@ -97,16 +118,27 @@ module.exports = {
     },
 
     delete (id, callback) {
-        const query = `
-            DELETE FROM teachers
-            WHERE id = $1
+        const updateQuery = `
+            UPDATE students SET
+                teacher_id = NULL
+            WHERE teacher_id = ${id}
         `
 
-        db.query(query, [id], (error) => {
+        db.query(updateQuery, (error) => {
             if (error)
                 throw `Database error! ${error}`
 
-            callback()
+            const deleteQuery = `
+                DELETE FROM teachers
+                WHERE id = ${id}
+            `
+            
+            db.query(deleteQuery, (error) => {
+                if (error)
+                    throw `Database error! ${error}`
+    
+                callback()
+            })  
         })
     }
 }

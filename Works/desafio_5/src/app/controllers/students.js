@@ -42,12 +42,16 @@ module.exports = {
                 birth: utils.date(students[0].birth).iso
             }
 
-            return response.render("students/edit", { student })
+            Student.getTeachersOptions(teachersOptions => {
+                return response.render("students/edit", { student, teachersOptions })
+            })
         })
     },
 
     create (request, response) {
-        return response.render("students/create")
+        Student.getTeachersOptions(teachersOptions => {
+            return response.render("students/create", { teachersOptions })
+        })
     },
 
     post (request, response) {

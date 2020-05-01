@@ -265,11 +265,34 @@ select {
 .table-container tbody td:first-child div {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .table-container tbody td:first-child img {
     width: 40px;
     border-radius: 50%;
     margin-right: 12px;
+}
+
+/* === FILTER === */
+.table-container .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.table-container .header a {
+    width: 175px;
+    margin: 0;
+}
+
+.table-container .header form {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 8px;
+}
+
+.table-container .header form input {
+    border: 1px solid #eee;
+    box-sizing: border-box;
 }

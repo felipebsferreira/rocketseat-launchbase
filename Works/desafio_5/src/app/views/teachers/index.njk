@@ -6,13 +6,20 @@
 
 {% block content %}
     <div class="card table-container">
-        <a id="index-create-btn" href="/teachers/create">Criar professor</a>
+        <div class="header">
+            <a class="button" href="/teachers/create">Criar professor</a>
+            <form action="/teachers" method="GET">
+                <input type="text" name="filter" placeholder="Nome ou acompanhamento" value={{ filter }}>
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
 
         <table>
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Acompanhamento</th>
+                    <th>Alunos</th>
                     <th>Ação</th>
                 </tr>
             </thead>
@@ -30,6 +37,9 @@
                             {% for area in teacher.areas %}
                                 <span>{{ area }}</span>
                             {% endfor %}
+                        </td>
+                        <td>
+                            {{ teacher.total_students }}
                         </td>
                         <td>
                             <a href="/teachers/{{ teacher.id }}">Ver</a>
