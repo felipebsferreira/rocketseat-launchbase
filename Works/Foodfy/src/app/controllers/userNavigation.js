@@ -1,4 +1,4 @@
-const data = require("../data")
+const data = require("../../../data")
 
 exports.home = function (request, response) {
     return response.render("userNavigation/home", { recipes: data.recipes })
@@ -9,6 +9,8 @@ exports.about = function (request, response) {
 }
 
 exports.recipes = function (request, response) {
+    let { filter } = request.query
+
     return response.render("userNavigation/recipes", { recipes: data.recipes })
 }
 

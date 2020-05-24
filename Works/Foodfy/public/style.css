@@ -28,35 +28,70 @@ header.admin {
     background-color: black;
 }
 
-header div {
-    display: flex;
+header div.header-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     width: 940px;
     margin: auto;
 }
 
 header img {
-    margin-right: 122.4px;
+    margin-right: 32px;
     cursor: pointer;
 }
 
-.menu a {
-    color: black;
+.menu a {    
     font-size: 16px;
     text-decoration: none;
-    margin: 0 15px;
+    margin-left: 10px;
 }
 
-.menu a.admin {
+.display-none {
+    display: none;
+}
+
+.menu-user a {
+    color: black;
+}
+
+.menu-admin a {
     color: white;
 }
 
-.menu a:hover {
+.menu-user a:hover {
     border-bottom: 2px solid black;
+}
+
+.menu.menu-admin a:hover {
+    border-bottom: 2px solid white;
 }
 
 .menu-selected {
     font-weight: bold;
+}
+
+.div-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.div-form.display-none {
+    display: none;
+}
+
+header form {
+    display: flex;
+    margin-left: 32px;
+}
+
+header form input {
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    margin-right: 8px;
+    padding-left: 16px;
+    width: 200px;
 }
 
 footer {
@@ -177,6 +212,13 @@ footer p {
     object-fit: cover;
 }
 
+.details-card.details-chef img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .details-card h1 {
     font-size: 36px;
     margin-top: 50px;
@@ -250,6 +292,7 @@ footer p {
     padding: 9px 20px;
     background-color: #6558C3;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .button.delete {
@@ -347,4 +390,41 @@ footer p {
 .create-edit-fields textarea {
     height: 260px;
     resize: none;
+}
+
+/* === CHEF INDEX === */
+.admin-chef-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.admin-chef-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-chef-card div:first-child {
+    margin-right: 20px;
+}
+
+.admin-chef-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.admin-chef-card p {
+    font-size: 18px;
+    margin-bottom: 5px;
+    width: 140px;
+    color: #111111;
+}
+
+.admin-chef-card a {
+    font-size: 14px;
+    color: #6558C3;
+    text-decoration: none;
 }

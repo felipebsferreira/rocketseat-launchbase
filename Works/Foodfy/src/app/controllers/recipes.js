@@ -1,5 +1,9 @@
 const fs = require("fs")
-const data = require("../data")
+const data = require("../../../data")
+
+exports.admin = function (request, response) {
+    return response.redirect("/admin/recipes")
+}
 
 exports.index = function (request, response) {
     return response.render("recipes/index", { recipes: data.recipes })
@@ -15,7 +19,7 @@ exports.show = function (request, response) {
     if (!recipe) {
         return response.send("Recipe not found!")
     }
-
+    
     return response.render("recipes/details", { recipe })
 }
 

@@ -7,6 +7,9 @@ for (let item of menuItems) {
     }
 }
 
+const menuAdmin = document.querySelector(".menu-admin")
+const menuUsers = document.querySelectorAll(".menu-user")
+
 if (pathName.includes("admin")) {
     const header = document.querySelector("header")
     header.classList.add("admin")
@@ -16,6 +19,17 @@ if (pathName.includes("admin")) {
     for (let item of menuItems) {
         item.classList.add("admin")
     }
+
+    menuAdmin.classList.remove("display-none")
+
+    for (let item of menuUsers)
+        item.classList.add("display-none")
+}
+else {
+    for (let item of menuUsers)
+        item.classList.remove("display-none")
+
+    menuAdmin.classList.add("display-none")
 }
 
 const pList = document.querySelectorAll(".details-info p")
@@ -43,50 +57,62 @@ for (let p of pList) {
     })
 }
 
-document.querySelector(".add-ingredient").addEventListener("click", () => {
-    const ingredients = document.querySelector("#ingredients")
-    const fieldContainer = document.querySelectorAll(".ingredient")
+const addIngredients = document.querySelector(".add-ingredient")
+if (addIngredients) {
+    addIngredients.addEventListener("click", () => {
+        const ingredients = document.querySelector("#ingredients")
+        const fieldContainer = document.querySelectorAll(".ingredient")
+    
+        const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+    
+        if (newField.children[0].value == "")
+            return false
+    
+        newField.children[0].value = ""
+        ingredients.appendChild(newField)
+    })
+}
 
-    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+const deleteIngredient = document.querySelector(".delete-ingredient")
+if (deleteIngredient) {
+    deleteIngredient.addEventListener("click", () => {
+        const ingredients = document.querySelector("#ingredients")
+        const fieldContainer = document.querySelectorAll(".ingredient")
+    
+        if (fieldContainer.length <= 1) {
+            return false
+        } else {
+            ingredients.removeChild(fieldContainer[fieldContainer.length - 1])
+        }
+    })
+}
 
-    if (newField.children[0].value == "")
-        return false
+const addPreparation = document.querySelector(".add-preparation")
+if (addPreparation) {
+    addPreparation.addEventListener("click", () => {
+        const preparations = document.querySelector("#preparations")
+        const fieldContainer = document.querySelectorAll(".preparation")
+    
+        const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+    
+        if (newField.children[0].value == "")
+            return false;
+    
+        newField.children[0].value = ""
+        preparations.appendChild(newField)
+    })
+}
 
-    newField.children[0].value = ""
-    ingredients.appendChild(newField)
-})
-
-document.querySelector(".delete-ingredient").addEventListener("click", () => {
-    const ingredients = document.querySelector("#ingredients")
-    const fieldContainer = document.querySelectorAll(".ingredient")
-
-    if (fieldContainer.length <= 1) {
-        return false
-    } else {
-        ingredients.removeChild(fieldContainer[fieldContainer.length - 1])
-    }
-})
-
-document.querySelector(".add-preparation").addEventListener("click", () => {
-    const preparations = document.querySelector("#preparations")
-    const fieldContainer = document.querySelectorAll(".preparation")
-
-    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-
-    if (newField.children[0].value == "")
-        return false;
-
-    newField.children[0].value = ""
-    preparations.appendChild(newField)
-})
-
-document.querySelector(".delete-preparation").addEventListener("click", () => {
-    const preparations = document.querySelector("#preparations")
-    const fieldContainer = document.querySelectorAll(".preparation")
-
-    if (fieldContainer.length <= 1) {
-        return false
-    } else {
-        preparations.removeChild(fieldContainer[fieldContainer.length - 1])
-    }
-})
+const deletePreparation = document.querySelector(".delete-preparation")
+if (deletePreparation) {
+    deletePreparation.addEventListener("click", () => {
+        const preparations = document.querySelector("#preparations")
+        const fieldContainer = document.querySelectorAll(".preparation")
+    
+        if (fieldContainer.length <= 1) {
+            return false
+        } else {
+            preparations.removeChild(fieldContainer[fieldContainer.length - 1])
+        }
+    })
+}

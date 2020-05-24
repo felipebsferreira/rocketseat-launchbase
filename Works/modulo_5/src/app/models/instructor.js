@@ -43,7 +43,7 @@ module.exports = {
             date(data.birth).iso,
             date(Date.now()).iso
         ]
-
+        
         db.query(query, values, (error, results) => {
             if (error)
                 throw `Database error! ${error}`
