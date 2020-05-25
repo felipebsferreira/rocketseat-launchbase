@@ -6,12 +6,16 @@
 
     <section>
         <p>Imagem da receita</p>
-        <input type="url" name="image" required value="{{ recipe.image }}">
+        <input type="url" name="image_url" required value="{{ recipe.image_url }}">
     </section>
     
     <section>
-        <p>Autor</p>
-        <input type="text" name="author" required value="{{ recipe.author }}">
+        <p>Chef</p>
+        <select name="chef_id" required placeholder="Selecione um chef">
+            {% for chef in chefs %}
+                <option value="{{ chef.id }}" {% if recipe.chef_id == chef.id %} selected {% endif %} >{{ chef.name }}</option>
+            {% endfor %}
+        </select>
     </section>
     
     <section>

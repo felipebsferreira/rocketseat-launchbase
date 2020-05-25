@@ -11,7 +11,7 @@ exports.show = function (request, response) {
     const id = request.params.id
 
     Chef.getById(id, true, chefAndRecipes => {
-        if (!chefAndRecipes)
+        if (chefAndRecipes.length == 0)
             response.send("Chef not found!")
         
         chef = {
@@ -29,7 +29,7 @@ exports.edit = function (request, response) {
     const id = request.params.id
 
     Chef.getById(id, false, result => {
-        if (!chef)
+        if (result.length == 0)
             response.send("Chef not found!")
         
         chef = {

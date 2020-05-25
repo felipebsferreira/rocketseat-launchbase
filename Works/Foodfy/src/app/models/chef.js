@@ -6,7 +6,7 @@ module.exports = {
         const query = `
             SELECT *
             FROM chefs
-            ORDER BY name
+            ORDER BY created_at
         `
 
         db.query(query, (error, results) => {

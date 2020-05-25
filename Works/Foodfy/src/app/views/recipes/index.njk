@@ -12,11 +12,11 @@
         {% for recipe in recipes %}
             <div class="admin-card">
                 <div>
-                    <img src="{{ recipe.image }}" alt="Imagem de {{ recipe.title }}">
+                    <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.title }}">
                 </div>
                 <div>
                     <h2>{{ recipe.title }}</h2>
-                    <p>{{ recipe.author }}</p>
+                    <p>{{ recipe.name }}</p>
                     <a href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
                 </div>
             </div>
