@@ -13,7 +13,7 @@
         <p>Chef</p>
         <select name="chef_id" required placeholder="Selecione um chef">
             {% for chef in chefs %}
-                <option value="{{ chef.id }}" {% if recipe.chef_id == chef.id %} selected {% endif %} >{{ chef.name }}</option>
+                <option value="{{ chef.id }}" {% if recipe.chef_id == chef.id %} selected {% endif %}>{{ chef.name }}</option>
             {% endfor %}
         </select>
     </section>

@@ -14,13 +14,13 @@ exports.show = function (request, response) {
         if (chefAndRecipes.length == 0)
             response.send("Chef not found!")
         
-        chef = {
+        const chef = {
             id: chefAndRecipes[0].id,
             name: chefAndRecipes[0].name,
             avatarUrl: chefAndRecipes[0].avatar_url,
             totalRecipes: chefAndRecipes[0].total_recipes
         }
-
+        
         return response.render("chefs/details", { chef, recipes: chefAndRecipes })
     })
 }

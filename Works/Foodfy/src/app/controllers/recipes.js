@@ -1,6 +1,3 @@
-const fs = require("fs")
-const data = require("../../../data")
-
 const Recipe = require("../models/recipe")
 
 exports.admin = function (request, response) {
@@ -46,7 +43,7 @@ exports.edit = function (request, response) {
 exports.post = function (request, response) {
     const { title, image_url, ingredients, preparations, information, chef_id } = request.body
 
-    const recipe = {
+    const data = {
         title,
         image_url,
         ingredients,
@@ -55,53 +52,33 @@ exports.post = function (request, response) {
         chef_id
     }
 
-    Recipe.create(recipe, id => {
+    Recipe.create(data, id => {
         return response.redirect(`/admin/recipes/${id}`)
     })
 }
 
 exports.put = function (request, response) {
-    const { id, title, image_url, author, ingredients, preparations, information } = request.body
+    const { id, title, image_url, chef_id, ingredients, preparations, information } = request.body
 
-    let foundIndex
-    data.recipes.find((recipe, index) => {
-        if (recipe.id == id) {
-            foundIndex = index
-            return true
-        }
-    })
-
-    data.recipes[foundIndex] = {
-        ...data.recipes[foundIndex],
+    const data = {
+        id: id,
         title: title,
         image_url: image_url,
-        author: author,
+        chef_id: chef_id,
         ingredients: ingredients,
         preparations: preparations,
         information: information
     }
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 4), (err) => {
-        if (err) {
-            return response.send("An error occurred while writting the file.")
-        } else {
-            return response.redirect(`/admin/recipes/${id}`)
-        }
+    Recipe.update(data, () => {
+        return response.redirect(`/admin/recipes/${data.id}`)
     })
 }
 
 exports.delete = function (request, response) {
     const { id }  = request.body
 
-    data.recipes = data.recipes.filter(recipe => {
-        return recipe.id != id
-    })
-
-    fs.writeFile("data.json", JSON.stringify(data, null, 4), (err) => {
-        if (err) {
-            return response.send("An error occurred while writting the file.")
-        } else {
-            return response.redirect("/admin/recipes/")
-        }
+    Recipe.delete(id, () => {
+        return response.redirect("/admin/recipes/")
     })
 }

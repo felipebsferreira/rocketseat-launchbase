@@ -18,4 +18,14 @@
     <form id="delete-recipe" method="POST" action="/admin/recipes?_method=DELETE">
         <input type="hidden" name="id" value="{{ recipe.id }}">
     </form>
+
+    <script>
+        const formDelete = document.querySelector("#delete-recipe")
+        formDelete.addEventListener("submit", (event) => {
+            const confirmation = confirm("Deseja deletar?")
+            if (!confirmation) {
+                event.preventDefault()
+            }
+        })
+    </script>
 {% endblock content %}

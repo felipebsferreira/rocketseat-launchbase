@@ -4,9 +4,16 @@ const db = require("../../config/db")
 module.exports = {
     getAll (callback) {
         const query = `
-            SELECT *
-            FROM chefs
-            ORDER BY created_at
+            SELECT c1.*, 
+            (
+                SELECT COUNT(r.id)
+                FROM chefs c2
+                LEFT JOIN recipes r
+                    ON r.chef_id = c2.id
+                WHERE c2.id = c1.id
+            ) as total_recipes
+            FROM chefs c1
+            ORDER BY c1.created_at
         `
 
         db.query(query, (error, results) => {
@@ -22,12 +29,18 @@ module.exports = {
         
         if (getRecipes) {
             query = `
-                SELECT c.id, c.name, c.avatar_url, count(r.id) as total_recipes, r.id as recipe_id, r.image_url, r.title
+                SELECT c.id, c.name, c.avatar_url, r.id as recipe_id, r.image_url, r.title,
+                (
+                    SELECT COUNT(r.id)
+                    FROM chefs c
+                    LEFT JOIN recipes r
+                        ON r.chef_id = c.id
+                    WHERE c.id = $1
+                ) as total_recipes
                 FROM chefs c
                 LEFT JOIN recipes r
                     ON r.chef_id = c.id
                 WHERE c.id = $1
-                GROUP BY c.id, r.id
             `
         }
         else {

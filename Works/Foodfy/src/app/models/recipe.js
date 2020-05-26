@@ -2,12 +2,18 @@ const db = require("../../config/db")
 const utils = require("../../lib/utils")
 
 module.exports = {
-    getAll (callback) {
+    getAll (callback, filter) {
+        let filterQuery = ""
+
+        if (filter)
+            filterQuery = `WHERE r.title ILIKE '%${filter}%'`
+        
         const query = `
             SELECT r.id, r.title, r.image_url, c.name
             FROM recipes r
             LEFT JOIN chefs c
                 ON c.id = r.chef_id
+            ${filterQuery}
             ORDER BY r.created_at
         `
 
@@ -81,6 +87,50 @@ module.exports = {
                 throw `Database error! ${error}`
             
             callback(results.rows)
+        })
+    },
+
+    update (data, callback) {
+        const query = `
+            UPDATE recipes SET
+                chef_id = $1,
+                image_url = $2,
+                title = $3,
+                information = $4,
+                ingredients = $5,
+                preparations = $6
+            WHERE id = $7
+        `
+
+        const values = [
+            data.chef_id,
+            data.image_url,
+            data.title,
+            data.information,
+            data.ingredients,
+            data.preparations,
+            data.id
+        ]
+
+        db.query(query, values, (error) => {
+            if (error)
+                throw `Database error! ${error}`
+
+            callback()
+        })
+    },
+
+    delete (id, callback) {
+        const query = `
+            DELETE FROM recipes
+            WHERE id = $1
+        `
+
+        db.query(query, [id], (error) => {
+            if (error)
+                throw `Database error! ${error}`
+
+            callback()
         })
     }
 }

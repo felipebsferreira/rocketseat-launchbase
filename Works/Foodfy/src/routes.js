@@ -7,6 +7,7 @@ routes.get("/", userNavigation.home)
 routes.get("/about", userNavigation.about)
 routes.get("/recipeslist", userNavigation.recipes)
 routes.get("/recipeslist/:id", userNavigation.details)
+routes.get("/chefslist", userNavigation.chefs)
 
 const recipes = require("./app/controllers/recipes")
 
