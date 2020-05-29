@@ -23,6 +23,14 @@ header {
     background: rgba(0, 0, 0, 0.1);
 }
 
+footer {
+    padding: 32px;
+    margin-top: 32px;
+    border-bottom: 1px solid #333;
+    background: rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
 .links {
     text-align: center;
 }
