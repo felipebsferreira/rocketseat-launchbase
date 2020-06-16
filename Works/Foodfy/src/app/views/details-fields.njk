@@ -1,5 +1,15 @@
 <div class="details-card">
-    <img src="{{ recipe.image_url }}" alt="Imagem de {{ recipe.title }}">
+    <img class="highlighted-image" src="{{ files[0].path }}" alt="Imagem de {{ recipe.title }}">
+    <div class="details-preview">
+        {% for file in files %}
+            <img src="{{ file.path }}" alt="Imagem de {{ recipe.title }}"
+                onclick="Lightbox.selectImage(event)"
+                {% if loop.index == 1 %}
+                    class="selected"
+                {% endif %}
+            >
+        {% endfor %}
+    </div>
     <h1>{{ recipe.title }}</h1>
     <p>{{ recipe.name }}</p>
 </div>

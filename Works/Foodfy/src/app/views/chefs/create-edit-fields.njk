@@ -6,6 +6,14 @@
 
     <section>
         <p>Avatar URL</p>
-        <input type="url" name="avatarUrl" required value="{{ chef.avatarUrl }}">
+
+        <div class="avatar-input">
+            <button class="button">Enviar Avatar</button>
+            <input type="file" name="avatar" accept="image/*" 
+                {% if not chef.avatarPath %}
+                    required    
+                {% endif %}
+            >
+        </div>
     </section>
 </div>

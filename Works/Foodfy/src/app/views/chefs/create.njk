@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form id="save-chef" method="POST" action="/admin/chefs">
+    <form id="save-chef" method="POST" action="/admin/chefs" enctype="multipart/form-data">
         {% include "chefs/create-edit-fields.njk" %}
     </form>
 {% endblock content %}

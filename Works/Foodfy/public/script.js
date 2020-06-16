@@ -116,3 +116,155 @@ if (deletePreparation) {
         }
     })
 }
+
+const ImageUpload = {
+    input: "",
+    preview: document.querySelector('.upload-gallery .images-preview'),
+    imageInput: document.querySelector('.upload-gallery .image-input'),
+    uploadLimit: 5,
+    files: [],
+
+    handleFileInput (event) {
+        const { files: fileList } = event.target
+        this.input = event.target
+
+        if (!this.isLimitReached(event)) {
+            Array.from(fileList).forEach(file => {
+                this.files.push(file)
+
+                const reader = new FileReader()
+
+                reader.onload = () => {
+                    const image = new Image()
+                    image.src = String(reader.result)
+
+                    const container = this.createPreviewContainer(image)
+                    this.preview.appendChild(container)
+                }
+
+                reader.readAsDataURL(file)
+            })
+
+            this.displayContainer(this.preview)
+        }
+
+        if (this.files.length == this.uploadLimit) {
+            this.undisplayContainer(this.imageInput)
+        }
+
+        this.input.files = this.getAllFiles()
+    },
+
+    getAllFiles () {
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+    
+        this.files.forEach(file => dataTransfer.items.add(file))
+        return dataTransfer.files
+    },
+
+    createPreviewContainer (image) {
+        const container = document.createElement('div')
+        container.classList.add('image')
+
+        container.onclick = this.removeImage
+
+        container.appendChild(image)
+        container.appendChild(this.createRemoveButton())
+
+        return container
+    },
+
+    createRemoveButton () {
+        const button = document.createElement('i')
+        
+        button.classList.add('material-icons')
+        button.innerHTML = "delete"
+        
+        return button
+    },
+
+    removeImage (event) {
+        const imageDiv = event.target.parentNode
+        const imageDivArray = Array.from(ImageUpload.preview.children)
+        
+        const index = imageDivArray.indexOf(imageDiv)
+
+        ImageUpload.files.splice(index, 1)
+        ImageUpload.input.files = ImageUpload.getAllFiles()
+
+        imageDiv.remove()
+
+        if (ImageUpload.files.length < ImageUpload.uploadLimit)
+            ImageUpload.displayContainer(ImageUpload.imageInput)
+    },
+
+    removeOldImage (event) {
+        const imageDiv = event.target.parentNode
+
+        if (imageDiv.id) {
+            const removedFiles = document.querySelector('input[name="removed_files"]')
+            if (removedFiles) {
+                removedFiles.value += `${imageDiv.id},`
+            }
+        }
+        
+        imageDiv.remove()
+    },
+
+    displayContainer (container) {
+        container.classList.remove("invisible")
+    },
+
+    undisplayContainer (container) {
+        container.classList.add("invisible")
+    },
+
+    isLimitReached(event) {
+        const { files: fileList } = event.target
+        let limitReached = false
+
+        if (fileList.length > this.uploadLimit) {
+            alert(`Insira até no máximo ${this.uploadLimit} imagens!`)
+            limitReached = true
+        }
+        
+        const imagesDiv = []
+        this.preview.childNodes.forEach(item => {
+            if (item.classList && item.classList.value == "image") {
+                imagesDiv.push(item)
+            }
+        })
+
+        if (fileList.length + imagesDiv.length > this.uploadLimit) {
+            alert("Você atingiu o limite de fotos!")
+            limitReached = true
+        }
+
+        if (limitReached) {
+            event.preventDefault()
+            return true
+        }
+        else
+            return false
+    }
+}
+
+const Lightbox = {
+    highlight: document.querySelector(".details-card img.highlighted-image"),
+
+    selectImage(event) {
+        this.unselectAllImages(event)
+        event.target.classList.add("selected")
+
+        const imageSrc = "/assets/" + event.target.src.split("/assets/")[1]
+        this.highlight.src = imageSrc
+    },
+
+    unselectAllImages(event) {
+        const previewDiv = event.target.parentNode
+
+        Array.from(previewDiv.children).forEach(children => {
+            children.classList.remove("selected")
+        })
+    }
+}

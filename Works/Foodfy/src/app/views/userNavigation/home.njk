@@ -22,7 +22,7 @@
         {% for i in range(0, 6) %}
             <div class="card">
                 <a href="/recipeslist/{{ recipes[i].id }}">
-                    <img src="{{ recipes[i].image_url }}" alt="Imagem de {{ recipes[i].title }}">
+                    <img src="{{ recipes[i].image_path }}" alt="Imagem de {{ recipes[i].title }}">
                 </a>
                 <p class="card-name">{{ recipes[i].title }}</p>
                 <p class="card-author">{{ recipes[i].name }}</p>

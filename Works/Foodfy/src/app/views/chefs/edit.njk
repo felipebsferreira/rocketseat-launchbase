@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form id="save-chef" method="POST" action="/admin/chefs?_method=PUT">
+    <form id="save-chef" method="POST" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
         {% include "chefs/create-edit-fields.njk" %}
         <input type="hidden" name="id" value="{{ chef.id }}">
     </form>

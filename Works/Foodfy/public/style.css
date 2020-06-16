@@ -10,6 +10,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.invisible {
+    display: none;
+}
+
 #page-container {
     position: relative;
     min-height: 100vh;
@@ -212,6 +216,30 @@ footer p {
     object-fit: cover;
 }
 
+.details-card .details-preview {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.details-card .details-preview img {
+    width: 50px;
+    height: 50px;
+    border-radius: 3.5px;
+    opacity: 0.5;
+    margin-left: 10px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.details-card .details-preview img.selected {
+    opacity: 1;
+}
+
+.details-card .details-preview img:hover {
+    opacity: 1;
+    transition: 200ms;
+}
+
 .details-card.details-chef img {
     width: 200px;
     height: 200px;
@@ -396,6 +424,37 @@ footer p {
     resize: none;
 }
 
+.button {
+    text-decoration: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 9px 20px;
+    background-color: #6558C3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-edit-fields .avatar-input {
+    position: relative;
+}
+
+.create-edit-fields .avatar-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: none;
+
+    width: 136px;
+    height: 36px;
+
+    border-radius: 4px;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
 /* === CHEF INDEX === */
 .admin-chef-cards {
     display: grid;
@@ -446,3 +505,92 @@ footer p {
     color: #111111;
     margin-bottom: 20px;
 }
+
+/* === UPLOAD GALLERY === */
+.upload-gallery {
+    display: flex;
+    
+    width: 100%;
+    height: 150px;
+
+    gap: 10px;
+}
+
+.images-preview {
+    display: flex;
+}
+
+.upload-gallery .image {
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-gallery .image img {
+    width: 150px;
+    height: 150px;
+
+    object-fit: cover;
+
+    margin-right: 10px;
+}
+
+.upload-gallery .image:hover img {
+    opacity: 0.5;
+    transition: 200ms;
+}
+
+.upload-gallery .image:hover i {
+    opacity: 1;
+    transition: 200ms;
+}
+
+.upload-gallery .image-input i,
+.upload-gallery .image i {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    
+    font-size: 200%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #777;
+}
+
+.upload-gallery .image i {
+    opacity: 0;
+    font-size: 200%;
+    color: red;
+}
+
+.upload-gallery .image-input {
+    width: 150px;
+    height: 150px;
+
+    border: 1px solid #DDD;
+    border-radius: 3.5px;
+
+    position: relative;
+}
+
+.upload-gallery .image-input input {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    opacity: 0;
+    cursor: pointer;
+}
+

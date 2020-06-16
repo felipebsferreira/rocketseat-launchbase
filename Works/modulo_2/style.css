@@ -46,7 +46,7 @@ header {
 }
 
 #wrapper img {
-    /* border-radius: 50%; */
+    border-radius: 50%;
     border: 5px solid var(--color-green);
     margin-bottom: 32px;
     height: 300px;

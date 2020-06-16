@@ -2,34 +2,48 @@ const { date } = require("../../lib/utils")
 const db = require("../../config/db")
 
 module.exports = {
-    getAll (callback) {
+    getAll () {
         const query = `
-            SELECT c1.*, 
+            SELECT c1.*,
             (
                 SELECT COUNT(r.id)
                 FROM chefs c2
                 LEFT JOIN recipes r
                     ON r.chef_id = c2.id
                 WHERE c2.id = c1.id
-            ) as total_recipes
+            ) as total_recipes,
+            (
+                SELECT f.path
+                FROM files f
+                WHERE f.id = c1.file_id
+            ) as avatar_path
             FROM chefs c1
             ORDER BY c1.created_at
         `
-
-        db.query(query, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            else
-                callback(results.rows)
-        })
+        
+        return db.query(query)
     },
 
-    getById (id, getRecipes, callback) {
+    getById (id, getRecipes) {
         let query = ``
         
         if (getRecipes) {
             query = `
-                SELECT c.id, c.name, c.avatar_url, r.id as recipe_id, r.image_url, r.title,
+                SELECT c.id, c.name, r.id as recipe_id, r.title,
+                (
+                    SELECT f.path
+                    FROM files f
+                    WHERE f.id = c.file_id
+                ) as avatar_path,
+                (
+                    SELECT f.path
+                    FROM files f
+                    LEFT JOIN recipe_files rf
+                        ON f.id = rf.file_id
+                    WHERE rf.recipe_id = r.id
+                    ORDER BY f.id
+                    LIMIT 1
+                ) as image_path,
                 (
                     SELECT COUNT(r.id)
                     FROM chefs c
@@ -45,92 +59,109 @@ module.exports = {
         }
         else {
             query = `
-                SELECT *
-                FROM chefs
+                SELECT c.*,
+                (
+                    SELECT f.path
+                    FROM files f
+                    WHERE f.id = c.file_id
+                ) as avatar_path
+                FROM chefs c
                 WHERE id = $1
             `
         }
 
-        db.query(query, [id], (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            else
-                callback(results.rows)
-        })
+        return db.query(query, [id])
     },
 
-    create (data, callback) {
+    getFileId(chefId) {
+        const query = `
+            SELECT file_id
+            FROM chefs
+            WHERE id = $1
+        `
+
+        return db.query(query, [chefId])
+    },
+
+    create (data) {
         const query = `
             INSERT INTO chefs (
                 name,
                 avatar_url,
-                created_at
+                created_at,
+                file_id
             )
-            VALUES ($1, $2, $3)
+            VALUES ($1, $2, $3, $4)
             RETURNING id
         `
 
         const values = [
             data.name,
-            data.avatarUrl,
-            date(Date.now()).iso
+            "",
+            date(Date.now()).iso,
+            data.fileId
         ]
         
-        db.query(query, values, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            else
-                callback(results.rows[0])
-        })
+        return db.query(query, values)
     },
 
-    update (data, callback) {
-        const query = `
-            UPDATE chefs SET
-                name = $1,
-                avatar_url = $2
-            WHERE id = $3
-        `
+    update (data) {
+        let query, values
+        
+        if (data.fileId) {
+            query = `
+                UPDATE chefs SET
+                    name = $1,
+                    avatar_url = $2,
+                    file_id = $3
+                WHERE id = $4
+            `
 
-        const values = [
-            data.name,
-            data.avatarUrl,
-            data.id
-        ]
+            values = [
+                data.name,
+                "",
+                data.fileId,
+                data.id
+            ]
+        } else {
+            query = `
+                UPDATE chefs SET
+                    name = $1,
+                    avatar_url = $2
+                WHERE id = $3
+            `
 
-        db.query(query, values, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            else
-                callback()
-        })
+            values = [
+                data.name,
+                "",
+                data.id
+            ]
+        }
+
+        return db.query(query, values)
     },
 
-    delete (id, callback) {
+    async delete (id) {
         let query = `
             SELECT *
             FROM recipes
             WHERE chef_id = $1
         `
-        db.query(query, [id], (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            
-            if (results.rowCount > 0)
-                callback(false)
-            else {
-                query = `
-                    DELETE FROM chef
-                    WHERE id = $1
-                `
 
-                db.query(query, [id], (error, results) => {
-                    if (error)
-                        throw `Database error! ${error}`
+        const results = await db.query(query, [id])
 
-                    callback(true)
-                })
+        if (results.rowCount > 0) {
+            return {
+                hasFailed: true
             }
-        })
+        }
+        else {
+            query = `
+                DELETE FROM chefs
+                WHERE id = $1
+            `
+
+            return db.query(query, [id])
+        }
     }
 }

@@ -2,14 +2,22 @@ const db = require("../../config/db")
 const utils = require("../../lib/utils")
 
 module.exports = {
-    getAll (callback, filter) {
+    getAll (filter) {
         let filterQuery = ""
 
         if (filter)
             filterQuery = `WHERE r.title ILIKE '%${filter}%'`
         
         const query = `
-            SELECT r.id, r.title, r.image_url, c.name
+            SELECT r.id, r.title, c.name, (
+                SELECT f.path
+                FROM files f
+                LEFT JOIN recipe_files rf
+                    ON rf.file_id = f.id
+                WHERE rf.recipe_id = r.id
+                  ORDER BY f.id
+                LIMIT 1
+            ) as image_path
             FROM recipes r
             LEFT JOIN chefs c
                 ON c.id = r.chef_id
@@ -17,15 +25,10 @@ module.exports = {
             ORDER BY r.created_at
         `
 
-        db.query(query, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-
-            callback(results.rows)
-        })
+        return db.query(query)
     },
 
-    getById (id, callback) {
+    getById (id) {
         const query = `
             SELECT r.*, c.name
             FROM recipes r
@@ -34,19 +37,13 @@ module.exports = {
             WHERE r.id = $1
         `
 
-        db.query(query, [id], (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-
-            callback(results.rows)
-        })
+        return db.query(query, [id])
     },
 
-    create (data, callback) {
+    create (data) {
         const query = `
             INSERT INTO recipes (
                 chef_id,
-                image_url,
                 title,
                 ingredients,
                 preparations,
@@ -59,7 +56,6 @@ module.exports = {
 
         const values = [
             data.chef_id,
-            data.image_url,
             data.title,
             data.ingredients,
             data.preparations,
@@ -67,44 +63,32 @@ module.exports = {
             utils.date(Date.now()).iso
         ]
 
-        db.query(query, values, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-
-            callback(results.rows[0].id)
-        })
+        return db.query(query, values)
     },
 
-    getChefOptions (callback) {
+    getChefOptions () {
         const query = `
             SELECT id, name
             FROM chefs
             ORDER BY name
         `
 
-        db.query(query, (error, results) => {
-            if (error)
-                throw `Database error! ${error}`
-            
-            callback(results.rows)
-        })
+        return db.query(query)
     },
 
-    update (data, callback) {
+    update (data) {
         const query = `
             UPDATE recipes SET
                 chef_id = $1,
-                image_url = $2,
-                title = $3,
-                information = $4,
-                ingredients = $5,
-                preparations = $6
-            WHERE id = $7
+                title = $2,
+                information = $3,
+                ingredients = $4,
+                preparations = $5
+            WHERE id = $6
         `
 
         const values = [
             data.chef_id,
-            data.image_url,
             data.title,
             data.information,
             data.ingredients,
@@ -112,25 +96,15 @@ module.exports = {
             data.id
         ]
 
-        db.query(query, values, (error) => {
-            if (error)
-                throw `Database error! ${error}`
-
-            callback()
-        })
+        return db.query(query, values)
     },
 
-    delete (id, callback) {
+    delete (id) {
         const query = `
             DELETE FROM recipes
             WHERE id = $1
         `
 
-        db.query(query, [id], (error) => {
-            if (error)
-                throw `Database error! ${error}`
-
-            callback()
-        })
+        return db.query(query, [id])
     }
 }
