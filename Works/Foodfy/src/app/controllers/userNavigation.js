@@ -26,11 +26,14 @@ module.exports = {
     async recipes (request, response) {
         try {
             let { filter } = request.query
+                orderByUpdated = false
         
             if (!filter)
                 filter = ""
+            else
+                orderByUpdated = true
         
-            let results = await Recipe.getAll(filter)
+            let results = await Recipe.getAll(filter, orderByUpdated)
             const recipes = results.rows.map(recipe => {
                 return {
                     ...recipe,

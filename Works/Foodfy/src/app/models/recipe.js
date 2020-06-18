@@ -2,8 +2,14 @@ const db = require("../../config/db")
 const utils = require("../../lib/utils")
 
 module.exports = {
-    getAll (filter) {
-        let filterQuery = ""
+    getAll (filter, orderByUpdated) {
+        let filterQuery = "",
+            orderByQuery = ""
+
+        if (orderByUpdated)
+            orderByQuery = 'r.updated_at DESC'
+        else
+            orderByQuery = 'r.created_at'
 
         if (filter)
             filterQuery = `WHERE r.title ILIKE '%${filter}%'`
@@ -22,7 +28,7 @@ module.exports = {
             LEFT JOIN chefs c
                 ON c.id = r.chef_id
             ${filterQuery}
-            ORDER BY r.created_at
+            ORDER BY ${orderByQuery}
         `
 
         return db.query(query)

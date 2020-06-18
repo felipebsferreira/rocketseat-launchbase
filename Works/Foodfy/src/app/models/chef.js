@@ -87,17 +87,15 @@ module.exports = {
         const query = `
             INSERT INTO chefs (
                 name,
-                avatar_url,
                 created_at,
                 file_id
             )
-            VALUES ($1, $2, $3, $4)
+            VALUES ($1, $2, $3)
             RETURNING id
         `
 
         const values = [
             data.name,
-            "",
             date(Date.now()).iso,
             data.fileId
         ]
@@ -112,14 +110,12 @@ module.exports = {
             query = `
                 UPDATE chefs SET
                     name = $1,
-                    avatar_url = $2,
-                    file_id = $3
-                WHERE id = $4
+                    file_id = $2
+                WHERE id = $3
             `
 
             values = [
                 data.name,
-                "",
                 data.fileId,
                 data.id
             ]
@@ -127,13 +123,11 @@ module.exports = {
             query = `
                 UPDATE chefs SET
                     name = $1,
-                    avatar_url = $2
-                WHERE id = $3
+                WHERE id = $2
             `
 
             values = [
                 data.name,
-                "",
                 data.id
             ]
         }
