@@ -9,6 +9,7 @@ module.exports = {
     async index (request, response) {
         try {
             let results = await Recipe.getAll()
+
             const recipes = results.rows.map(recipe => {
                 return {
                     ...recipe,
@@ -16,7 +17,10 @@ module.exports = {
                 }
             })
     
-            return response.render("recipes/index", { recipes })
+            return response.render("recipes/index", { 
+                recipes,
+                userIsAdmin: request.session.userIsAdmin
+             })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -41,7 +45,11 @@ module.exports = {
                 }
             })
                 
-            return response.render("recipes/details", { recipe, files })
+            return response.render("recipes/details", { 
+                recipe, 
+                files,
+                userIsAdmin: request.session.userIsAdmin
+             })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -52,7 +60,11 @@ module.exports = {
             let results = await Recipe.getChefOptions()
             const chefs = results.rows
     
-            return response.render("recipes/create", { create: true, chefs })
+            return response.render("recipes/create", { 
+                create: true, 
+                chefs,
+                userIsAdmin: request.session.userIsAdmin 
+            })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -79,8 +91,13 @@ module.exports = {
                     path: file.path.replace("public", "")
                 }
             })
-                
-            return response.render("recipes/edit", { recipe, chefs, files })
+            
+            return response.render("recipes/edit", { 
+                recipe, 
+                chefs, 
+                files,
+                userIsAdmin: request.session.userIsAdmin 
+            })
         } catch(error) {
             return response.send(`${error}`)
         }

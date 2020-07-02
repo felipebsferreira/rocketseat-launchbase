@@ -1,0 +1,16 @@
+{% extends "../layout.njk" %}
+
+{% block content %}
+    <div class="admin-header">
+        <h1 id="admin-title">Criar Usuário</h1>
+        <div>
+            <button class="button" type="submit" form="user-create-form">Salvar</button>
+            <a href="/admin/users" class="button cancel">Cancelar</a>
+        </div>
+    </div>
+
+    <form action="/admin/users" method="POST" id="user-create-form">
+        {% include 'users/fields.njk' %}
+        <input type="hidden" name="id" value="{{ user.id }}">
+    </form>
+{% endblock content %}

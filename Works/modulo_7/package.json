@@ -1,8 +1,9 @@
 {
-  "name": "foodfy",
+  "name": "launchstore",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
     "start": "npm-run-all -p nodemon browsersync",
     "nodemon": "nodemon src/server.js",
     "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,src/app/views'"
@@ -14,8 +15,9 @@
     "express-session": "^1.17.1",
     "method-override": "^3.0.0",
     "multer": "^1.4.2",
+    "nodemailer": "^6.4.10",
     "nunjucks": "^3.2.1",
-    "pg": "^8.1.0"
+    "pg": "^8.0.2"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",

@@ -1,9 +1,9 @@
-const express = require("express")
-const nunjucks = require("nunjucks")
+const express = require('express')
+const nunjucks = require('nunjucks')
 const methodOverride = require("method-override")
 
 const routes = require("./routes")
-const session = require("./config/session")
+const session = require('./config/session')
 
 const server = express()
 
@@ -24,10 +24,6 @@ nunjucks.configure("src/app/views", {
     express: server,
     autoescape: false,
     noCache: true
-})
-
-server.use((request, response) => {
-    response.status(404).render("not-found")
 })
 
 server.listen(5000, () => {

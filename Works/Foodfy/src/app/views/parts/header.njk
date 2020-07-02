@@ -1,0 +1,35 @@
+<header>
+    <div class="header-content">
+        <a href="/">
+            <img src="/assets/logo_black.png" alt="logo_foodfy">
+        </a>  
+        
+        <div class="menu menu-user">
+            <a href="/about">Sobre</a>
+            <a href="/recipeslist">Receitas</a>
+            <a href="/chefslist">Chefs</a>
+            <a href="/login">Login</a>
+        </div>
+
+        <div class="menu menu-admin">
+            <a href="/admin/recipes">Receitas</a>
+            <a href="/admin/chefs">Chefs</a>
+            {% if userIsAdmin %}
+                <a href="/admin/users">Usuários</a>
+            {% else %}
+                <a href="/admin/users/profile">Perfil</a>
+            {% endif %}
+        </div>
+
+        <div class="div-form menu-admin">
+            <a href="/logout">Sair</a>
+        </div>
+
+        <div class="div-form menu-user">
+            <form action="/recipeslist" method="GET">
+                <input type="text" name="filter" placeholder="Buscar uma receita" value={{ filter }}>
+                <button class="button" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</header>

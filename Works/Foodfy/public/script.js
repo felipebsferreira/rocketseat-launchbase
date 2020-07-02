@@ -7,7 +7,7 @@ for (let item of menuItems) {
     }
 }
 
-const menuAdmin = document.querySelector(".menu-admin")
+const menuAdmins = document.querySelectorAll(".menu-admin")
 const menuUsers = document.querySelectorAll(".menu-user")
 
 if (pathName.includes("admin")) {
@@ -20,7 +20,8 @@ if (pathName.includes("admin")) {
         item.classList.add("admin")
     }
 
-    menuAdmin.classList.remove("display-none")
+    for (let item of menuAdmins)
+        item.classList.remove("display-none")
 
     for (let item of menuUsers)
         item.classList.add("display-none")
@@ -29,7 +30,8 @@ else {
     for (let item of menuUsers)
         item.classList.remove("display-none")
 
-    menuAdmin.classList.add("display-none")
+    for (let item of menuAdmins)
+        item.classList.add("display-none")
 }
 
 const pList = document.querySelectorAll(".details-info p")

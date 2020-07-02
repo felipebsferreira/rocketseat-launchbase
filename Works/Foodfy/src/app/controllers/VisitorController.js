@@ -13,14 +13,14 @@ module.exports = {
                 }
             })
             
-            return response.render("userNavigation/home", { recipes })
+            return response.render("visitors/home", { recipes })
         } catch (error) {
             return response.send(`${error}`)
         }
     },
     
     about (request, response) {
-        return response.render("userNavigation/about")
+        return response.render("visitors/about")
     },
     
     async recipes (request, response) {
@@ -41,7 +41,7 @@ module.exports = {
                 }
             })
         
-            return response.render("userNavigation/recipes", { recipes, filter })
+            return response.render("visitors/recipes", { recipes, filter })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -66,7 +66,7 @@ module.exports = {
                 }
             })
                 
-            return response.render("userNavigation/details", { recipe, files })
+            return response.render("visitors/details", { recipe, files })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -82,7 +82,7 @@ module.exports = {
                 }
             })
         
-            return response.render("userNavigation/chefs", { chefs })
+            return response.render("visitors/chefs", { chefs })
         } catch (error) {
             return response.send(`${error}`)
         }

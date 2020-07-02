@@ -1,0 +1,54 @@
+.messages {
+    position: absolute;
+
+    top: -150px;
+    right: 18px;
+    z-index: 1;
+
+    width: 344px;
+    height: 135px;
+
+    border: 1px solid #DDD;
+    border-radius: 4px;
+
+    padding: 15px;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: hide-message 5s forwards;
+    animation-timing-function: cubic-bezier(0.1, 1, 0, 1);
+}
+
+@keyframes hide-message {
+    from {
+        top: -150px;
+        opacity: 0;
+    }
+
+    50% {
+        top: 12px;
+        opacity: 1;
+    }
+
+    to {
+        top: -150px;
+        opacity: 0;
+    }
+}
+
+.messages.error {
+    background-color: #DC4747;
+}
+
+.messages.success {
+    background-color: #01B12A;
+}
+
+.messages.neutral {
+    background-color: #DDD;
+    color: black;
+}

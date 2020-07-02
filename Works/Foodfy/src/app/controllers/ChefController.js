@@ -13,7 +13,10 @@ module.exports = {
                 }
             })
         
-            return response.render("chefs/index", { chefs })
+            return response.render("chefs/index", { 
+                chefs,
+                userIsAdmin: request.session.userIsAdmin
+            })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -47,7 +50,11 @@ module.exports = {
                 totalRecipes: recipes[0].total_recipes
             }
         
-            return response.render("chefs/details", { chef, recipes })
+            return response.render("chefs/details", {
+                chef,
+                recipes,
+                userIsAdmin: request.session.userIsAdmin
+            })
         } catch(error) {
             return response.send(`${error}`)
         }
@@ -67,14 +74,19 @@ module.exports = {
                 avatarPath: results.rows[0].avatar_path,
             }
         
-            return response.render("chefs/edit", { chef })
+            return response.render("chefs/edit", {
+                chef,
+                userIsAdmin: request.session.userIsAdmin
+            })
         } catch(error) {
             return response.send(`${error}`)
         }
     },
     
     create (request, response) {
-        return response.render("chefs/create")
+        return response.render("chefs/create", {
+            userIsAdmin: request.session.userIsAdmin
+        })
     },
     
     async post (request, response) {

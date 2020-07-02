@@ -1,0 +1,28 @@
+{% extends "../layout.njk" %}
+
+{% block content %}
+    <div class="admin-header">
+        <h1 id="admin-title">Usuários</h1>
+        <div>
+            <a class="button" href="/admin/users/create">Novo</a>
+        </div>
+    </div>
+
+    <div class="user-list">
+        {% for user in users %}
+            <section>
+                <p>{{ user.name }}</p>
+                <p>{{ user.email }}</p>
+
+                <div>
+                    <a href="/admin/users/{{ user.id }}">Editar</a>
+
+                    <form action="/admin/users?_method=DELETE" method="POST">
+                        <button type="submit">Remover</button>
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                    </form>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+{% endblock content %}

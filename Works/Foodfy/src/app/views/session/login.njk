@@ -1,0 +1,30 @@
+{% extends "../layout.njk" %}
+
+{% block content %}
+    <form class="login" action="/login" method="POST">
+        <h1>Iniciar Sessão</h1>
+
+        <section>
+            <p>E-mail</p>
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Digite seu e-mail"
+                {% if isEmailInvalid %}
+                    class="invalid"
+                {% endif %}
+            >
+        </section>
+
+        <section>
+            <p>Senha</p>
+            <input type="password" name="password" placeholder="Digite sua senha"
+                {% if isPasswordInvalid %}
+                    class="invalid"
+                {% endif %}
+            >
+        </section>
+
+        <div>
+            <a href="/login/forgot">Perdeu a senha?</a>
+            <button class="button" type="submit">Acessar</button>
+        </div>
+    </form>
+{% endblock content %}

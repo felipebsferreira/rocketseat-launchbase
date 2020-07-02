@@ -1,0 +1,29 @@
+.profile-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+}
+
+.profile-fields p {
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.profile-fields input {
+    width: 100%;
+
+    border: 1px solid #DDD;
+    border-radius: 4px;
+
+    padding: 15px;
+    box-sizing: border-box;
+
+    font-size: 16px;
+}
+
+.profile-fields input.invalid {
+    border: 1px solid #FF3131;
+}
